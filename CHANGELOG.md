@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Recomputed prompt, execution and neutral release digests after canonical
+  single-newline file normalization.
 - Created an independent OpenAI Responses API provider for the opaque Deep
   Screening `SENSOR_SURFACE` contract.
 - Added an immutable provider lock, digest-pinned prompt, neutral release

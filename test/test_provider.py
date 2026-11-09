@@ -23,7 +23,7 @@ from aelev_deep_screening_provider.engine import (
 )
 
 ROOT = Path(__file__).resolve().parents[1]
-DIGEST = "sha256:e2551416b933fde52bd4921868333f3775b61221284ad768130a81d6d79696aa"
+DIGEST = "sha256:f979b5590a85d75741c2382b4be299ab9cdcd6c0cf3c578394b1046fdc8437b7"
 OUTPUT: dict[str, object] = {
     "decision": "REVIEW",
     "candidates": [],
