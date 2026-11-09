@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Deep Screening opaque compute v1",
+  "$defs": {
+    "request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "owner", "task", "request_id", "release_digest", "input"],
+      "properties": {
+        "schema_version": {"const": 1},
+        "owner": {"const": "deep-screening"},
+        "task": {"const": "SENSOR_SURFACE"},
+        "request_id": {"type": "string", "minLength": 1, "maxLength": 240},
+        "release_digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+        "input": {"type": "object"}
+      }
+    },
+    "response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "owner", "task", "request_id", "release_digest", "output"],
+      "properties": {
+        "schema_version": {"const": 1},
+        "owner": {"const": "deep-screening"},
+        "task": {"const": "SENSOR_SURFACE"},
+        "request_id": {"type": "string"},
+        "release_digest": {"type": "string"},
+        "output": {"type": "object"}
+      }
+    }
+  }
+}
