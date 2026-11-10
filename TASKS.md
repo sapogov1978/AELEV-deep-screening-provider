@@ -11,7 +11,7 @@
 - [x] Review bounded real PDF, spreadsheet, image and multilingual inference on
   candidate v0.2.1; see [evaluation](docs/audit/provider-evaluation-v0.2.1-20261110.md).
 - [ ] Close image vulnerability admission and verify the hardened exact release;
-  see [current evidence](docs/audit/runtime-security-20261110.md).
+  see [scoped pre-release evidence](docs/audit/runtime-security-20261111.md).
 - [ ] Admit owner-collected binary inputs in the deployed functional service.
 - [ ] Complete functional-owner admission and deployed worker E2E.
 - [ ] Exercise the exact image with production mTLS identities.

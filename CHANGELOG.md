@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Added source/lock/gate-bound CVE applicability evidence for the restricted
+  provider entrypoint. Raw findings remain visible; unknown HIGH/CRITICAL,
+  changed reviewed code/dependencies and missing controls block admission.
+- Release signing now requires the exact main source audit and a native amd64
+  scan of the published digest followed by the scoped security gate. Runtime
+  profile evidence is retained as a release-workflow artifact.
 - Added an immutable-image runtime probe and CI receipt for both Python
   environments, absent build tools/SQLite, MiniZip and systemd-homed. It runs
   without network or credentials and does not claim complete CVE admission.

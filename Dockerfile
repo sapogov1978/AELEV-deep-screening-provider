@@ -18,6 +18,7 @@ RUN --mount=type=cache,id=aelev-dss-provider-poetry,target=/root/.cache/pypoetry
 ENV PYTHONPATH=/opt/aelev/src VIRTUAL_ENV=/opt/aelev/.venv PATH=/opt/aelev/.venv/bin:$PATH
 COPY src ./src
 COPY test ./test
+COPY tools ./tools
 COPY prompts ./prompts
 COPY contracts ./contracts
 COPY provider.lock.json release.json ./

@@ -64,6 +64,14 @@ Those account-level properties remain admission gates.
 
 ## Readiness and release
 
+Security admission uses the [reviewed runtime profile](security/runtime-profile.json)
+and [CVE-specific evidence](docs/audit/runtime-security-20261111.md). It is scoped
+to the default opaque entrypoint under non-root, read-only, no-capabilities and
+no-new-privileges conditions. The owner verifies those conditions at deployment.
+Any changed reviewed source/dependency or unreviewed HIGH/CRITICAL blocks the
+gate. Release signing requires the exact successful main audit and a scan of
+the actual published native digest; raw findings and decisions are retained.
+
 The runtime uses the same Python 3.13.7 Debian Bookworm base as the builder,
 but copies only the locked application environment. Poetry, its build-only
 dependencies, pip and setuptools are excluded from runtime. Build and test
