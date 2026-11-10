@@ -2,17 +2,18 @@
   "schema_version": "2.0.0",
   "status": "SELECTED_REMOTE_API",
   "provider": "openai",
-  "selected_at": "2026-11-09",
+  "selected_at": "2026-11-10",
   "selection_policy": "OPERATOR_APPROVED_OPAQUE_REMOTE_API",
-  "execution_ref": "openai-responses@sha256:ad4900f2ad78980149b56af5e0a508da441267b7c881147d08542bd11c71a568",
+  "execution_ref": "openai-responses@sha256:778992a1e0b4c30b21da51901516236ecc8abfeae551a03c7522aa6c0e6955f5",
   "api": {
     "endpoint": "https://api.openai.com/v1/responses",
     "model": "gpt-6.1-sol",
     "reasoning_effort": "medium",
     "max_output_tokens": 8192,
     "store": false,
-    "prompt_profile": "sensor-surface-v1",
-    "prompt_sha256": "6d69e666081fc83e24e192ddf11f1083027075771e8df38d80ae548d23737d84"
+    "prompt_profile": "sensor-surface-v2",
+    "prompt_sha256": "7ddc42e7dde5dcdef5ffab9f14fc340b53028fab195b0a50b6c008f401b9cf02",
+    "media_profile": "bounded-document-content-v1"
   },
   "transport": {
     "mode": "direct-https",

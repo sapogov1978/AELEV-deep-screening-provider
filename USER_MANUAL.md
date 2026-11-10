@@ -24,6 +24,14 @@ configuration.
 
 ## Admission
 
+For multimedia evaluation, collect and retain the source bytes under the
+functional owner's budgets, then supply their exact URL, MIME type, base64 and
+SHA-256. The provider accepts at most 128 KiB per attachment and 512 KiB total;
+the whole input remains bounded to 1 MiB. Rejected media must remain visible as
+unknown or blocked scope; do not relabel a text-only projection as image/PDF
+understanding. The v0.2.0 candidate's transport tests use synthetic bytes and
+do not close the live multimedia quality gate.
+
 A healthy process proves only local configuration. Before selecting the release
 digest in Deep Screening, run representative sensor-surface evals with the exact
 image/model/prompt, review evidence-binding failures and record the admission

@@ -14,6 +14,7 @@ from typing import Any, cast
 import httpx
 
 from .contract import validate_output
+from .media import content_parts
 
 ENDPOINT = "https://api.openai.com/v1/responses"
 ROOT = Path(__file__).resolve().parents[2]
@@ -127,6 +128,7 @@ def read_profile(lock_path: Path, prompt_root: Path) -> Profile:
         or type(api.get("max_output_tokens")) is not int
         or not 256 <= cast(int, api["max_output_tokens"]) <= 128000
         or api.get("store") is not False
+        or api.get("media_profile") != "bounded-document-content-v1"
         or not isinstance(profile, str)
         or re.fullmatch(r"[a-z0-9][a-z0-9-]{1,63}", profile) is None
         or not isinstance(prompt_digest, str)
@@ -245,14 +247,7 @@ class Engine:
             "input": [
                 {
                     "role": "user",
-                    "content": [
-                        {
-                            "type": "input_text",
-                            "text": json.dumps(
-                                model_input, ensure_ascii=False, separators=(",", ":")
-                            ),
-                        }
-                    ],
+                    "content": content_parts(model_input),
                 }
             ],
             "reasoning": {"effort": self.settings.profile.reasoning_effort},

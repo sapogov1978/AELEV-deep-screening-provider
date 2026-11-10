@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "status": "BOUNDED_PROVIDER_QUALITY_PASS",
+  "release_tag": "v0.1.1",
+  "owner": "deep-screening",
+  "image": "ghcr.io/sapogov1978/aelev-deep-screening-provider@sha256:b2cd5bfa0640c47f5fdef47cbee2a90f112fd19b1d74f09249e2ca764a9f2d8c",
+  "artifact_source_commit": "0cfb2e867782f3be2f8493972813dadd3357de45",
+  "release_digest": "sha256:f979b5590a85d75741c2382b4be299ab9cdcd6c0cf3c578394b1046fdc8437b7",
+  "live_architecture": "linux/arm64",
+  "evaluation_scope": "SENSOR_SURFACE collected HTML only",
+  "started_at": "2026-11-10T21:09:04.782086+00:00",
+  "finished_at": "2026-11-10T21:11:20.437792+00:00",
+  "corpus_sha256": "7fd7790ed215c897d1d1cba8dd1871aef5bbc506b5935a38e9919b6f4784f028",
+  "case_count": 2,
+  "semantic_reviewer": "Codex",
+  "cases": [
+    {
+      "id": "real-collected-queue-site-surface",
+      "provenance": {
+        "source": "advance-screening own completed queue job and persisted collection",
+        "job_id": "eed64507-005f-5f0b-a217-c802af4fb391",
+        "policy_digest": "sha256:90fdad3461d8d24ff6778e9a812d78afbd97c3e1ee35dc55a23efb1674dbd014",
+        "snapshots": [
+          {
+            "url": "https://www.federalreserve.gov/",
+            "body_digest": "sha256:0d954af2909c62ffab0cbe05d6162f3200ed6bdc6133734127fa4d9fd9d54135",
+            "snapshot_id": "sha256:1f5c108bb7e1aba5e554bcc235b349185a8c2dd0d130e8cd432501fe7a9726d6"
+          },
+          {
+            "url": "https://www.federalreserve.gov/recentpostings.htm",
+            "body_digest": "sha256:fc98c0285fa01003d4a25cb86e3467aca9365fd287198d4af3344895d3c65534",
+            "snapshot_id": "sha256:6da3df539f1c81568f34a9470f281fa17806dd3dc3cbcd5698b8869e43671e97"
+          },
+          {
+            "url": "https://www.federalreserve.gov/default.htm",
+            "body_digest": "sha256:4d38f2198115e9927ac275f4bf823d433ed02ef1edc24e0105662d00a3921b6b",
+            "snapshot_id": "sha256:36050343983a2c2800b33a4bed3d8b158fafe598a04f89f3e95f572be93ca713"
+          },
+          {
+            "url": "https://www.federalreserve.gov/aboutthefed/fedexplained/who-we-are.htm",
+            "body_digest": "sha256:a5cc321eeea835af57346095b52b8b3f7e44ff9aa9cdc70336c12db91e342b1d",
+            "snapshot_id": "sha256:bf30e3eed872bf8842bb846f5a32c78d5621e62817210c6c8cccd39e64fd243c"
+          }
+        ],
+        "variant": "Provider-only replay of actual owner-collected material; not a Deep worker E2E"
+      },
+      "expected": "SUITABLE",
+      "observed": "SUITABLE",
+      "input_sha256": "9ef9e4417407f8e6856acd9447cdca96b17cebb155d339cf681ce6abb685d4d2",
+      "output_sha256": "357d271854acb4a6683f699e2099eaf255b8ed3ab06ca6ca150edf5e8649c1cf",
+      "elapsed_seconds": 6.74,
+      "semantic_review": "PASS"
+    },
+    {
+      "id": "same-target-evidence-withheld",
+      "provenance": {
+        "source": "advance-screening own completed queue job and persisted collection",
+        "job_id": "eed64507-005f-5f0b-a217-c802af4fb391",
+        "policy_digest": "sha256:90fdad3461d8d24ff6778e9a812d78afbd97c3e1ee35dc55a23efb1674dbd014",
+        "snapshots": [
+          {
+            "url": "https://www.federalreserve.gov/",
+            "body_digest": "sha256:0d954af2909c62ffab0cbe05d6162f3200ed6bdc6133734127fa4d9fd9d54135",
+            "snapshot_id": "sha256:1f5c108bb7e1aba5e554bcc235b349185a8c2dd0d130e8cd432501fe7a9726d6"
+          },
+          {
+            "url": "https://www.federalreserve.gov/recentpostings.htm",
+            "body_digest": "sha256:fc98c0285fa01003d4a25cb86e3467aca9365fd287198d4af3344895d3c65534",
+            "snapshot_id": "sha256:6da3df539f1c81568f34a9470f281fa17806dd3dc3cbcd5698b8869e43671e97"
+          },
+          {
+            "url": "https://www.federalreserve.gov/default.htm",
+            "body_digest": "sha256:4d38f2198115e9927ac275f4bf823d433ed02ef1edc24e0105662d00a3921b6b",
+            "snapshot_id": "sha256:36050343983a2c2800b33a4bed3d8b158fafe598a04f89f3e95f572be93ca713"
+          },
+          {
+            "url": "https://www.federalreserve.gov/aboutthefed/fedexplained/who-we-are.htm",
+            "body_digest": "sha256:a5cc321eeea835af57346095b52b8b3f7e44ff9aa9cdc70336c12db91e342b1d",
+            "snapshot_id": "sha256:bf30e3eed872bf8842bb846f5a32c78d5621e62817210c6c8cccd39e64fd243c"
+          }
+        ],
+        "variant": "Explicit incomplete-evidence regression"
+      },
+      "expected": "REVIEW",
+      "observed": "REVIEW",
+      "input_sha256": "bdc9699241b0c725bc9cf1e651370220a3760bd727c84607929a446c4e3425cd",
+      "output_sha256": "f9f30f7ad2f0af25080a3e30319ce71371b8905cac581accbcb3c77417029e9b",
+      "elapsed_seconds": 2.433,
+      "semantic_review": "PASS"
+    }
+  ],
+  "supply_chain": {
+    "release_run": 42900484236,
+    "signature_identity": "https://github.com/sapogov1978/AELEV-deep-screening-provider/.github/workflows/release.yml@refs/tags/v0.1.1",
+    "signature_issuer": "https://token.actions.githubusercontent.com",
+    "platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ]
+  },
+  "evidence_sha256": {
+    "deep-screening-quality.json": "a05e15dfa8cbf87a87167acf78b405759165cc76e81ebab00062c44878ff33c6",
+    "signature.json": "64c250b088a2723c251b84b0dde413d899dab46f38643790befb47e97b8bf62d",
+    "manifest.json": "b2cd5bfa0640c47f5fdef47cbee2a90f112fd19b1d74f09249e2ca764a9f2d8c",
+    "provenance.json": "263aa3eaa13b07287df0c5360f60959f23614b368366e12822fa0428f278da45",
+    "sbom.json": "af9671e0c2d792c6b30c7f92947935243148cf114ea96cd14493e156c95f0d08"
+  },
+  "mtls_scope": "ISOLATED_TEST_IDENTITIES",
+  "anonymous_tls_rejected": true,
+  "wrong_release_rejected": true,
+  "cleanup_preserved": true,
+  "queue_resume_issued": false,
+  "raw_evidence_path": "/var/tmp/aelev-production-admission.wDuzQd/deep-v011/deep-screening-quality.json",
+  "remaining_gates": [
+    "FUNCTIONAL_OWNER_ADMISSION",
+    "PERMANENT_OWNER_IDENTITIES",
+    "OWNER_WORKER_E2E",
+    "MULTIMEDIA_QUALITY"
+  ]
+}
