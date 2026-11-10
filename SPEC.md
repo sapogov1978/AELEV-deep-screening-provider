@@ -30,7 +30,7 @@ alongside the ordinary document metadata. This is source evidence, not an API
 model setting. No provider-specific fields are added to the opaque envelope.
 
 The provider accepts PDF; CSV/TSV and XLS/XLSX spreadsheets; PNG, JPEG and WebP
-images. Limits are eight documents, 131072 decoded bytes per attachment and
+images. Limits are eight documents, 524288 decoded bytes per attachment and
 524288 decoded bytes across attachments, within the existing 1 MiB input limit.
 Invalid base64, unsupported media, missing bytes and digest mismatches return
 422 before any API call. The owner remains responsible for safe collection,
@@ -40,7 +40,7 @@ Supplied bytes are sent inline as file/image content parts, with exact URL and
 digest binding immediately before each attachment. Base64 is removed from the
 text metadata. The provider never uses upstream `file_url`, persistent Files
 uploads or a provider-side source fetch. PDF page images and ordinary images use
-high detail under the locked `bounded-document-content-v1` profile.
+high detail under the locked `bounded-document-content-v2` profile.
 
 Spreadsheet input does not establish review of embedded charts or every row;
 the v2 prompt requires explicit unknown scope for unobserved content. Transport

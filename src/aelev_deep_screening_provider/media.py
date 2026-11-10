@@ -11,7 +11,7 @@ from urllib.parse import urlsplit
 
 from .contract import RequestInvalid
 
-MAX_DOCUMENT_BYTES = 131_072
+MAX_DOCUMENT_BYTES = 524_288
 MAX_TOTAL_DOCUMENT_BYTES = 524_288
 MAX_DOCUMENTS = 8
 FILE_TYPES = {

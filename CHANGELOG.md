@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Raised the individual attachment limit to the existing 512 KiB aggregate
+  budget after a real 256628-byte one-page Spanish PDF failed the initial
+  128 KiB limit. The total decoded-byte budget and 1 MiB opaque input bound
+  remain unchanged; the updated media profile is locked as v2.
 - Return bounded HTTP 503 `PROVIDER_BUSY` for overlapping inference rather than
   queueing behind the active upstream call. HTTP and timeout tests prove a busy
   request makes no second API call and failures release provider capacity.

@@ -119,7 +119,7 @@ def test_missing_binary_document_bytes_are_not_silently_omitted() -> None:
         content_parts({"documents": [missing]})
 
 
-def test_individual_and_aggregate_decoded_byte_budgets() -> None:
+def test_individual_decoded_byte_budget() -> None:
     with pytest.raises(RequestInvalid):
         content_parts(
             {
@@ -128,16 +128,22 @@ def test_individual_and_aggregate_decoded_byte_budgets() -> None:
                 ]
             }
         )
-    count = MAX_TOTAL_DOCUMENT_BYTES // MAX_DOCUMENT_BYTES + 1
+
+
+def test_one_document_can_use_the_shared_budget_without_raising_total_capacity() -> (
+    None
+):
+    attachment = document("application/pdf", b"x" * 256_628)
+    assert content_parts({"documents": [attachment]})[2]["type"] == "input_file"
+    within_individual_limit = document(
+        "application/pdf", b"x" * (MAX_TOTAL_DOCUMENT_BYTES // 2 + 1)
+    )
+    assert (
+        content_parts({"documents": [within_individual_limit]})[2]["type"]
+        == "input_file"
+    )
     with pytest.raises(RequestInvalid, match="BUDGET_EXCEEDED"):
-        content_parts(
-            {
-                "documents": [
-                    document("application/pdf", b"x" * MAX_DOCUMENT_BYTES)
-                    for _ in range(count)
-                ]
-            }
-        )
+        content_parts({"documents": [within_individual_limit, within_individual_limit]})
 
 
 def test_engine_sends_mixed_evidence_as_provider_owned_content_parts() -> None:

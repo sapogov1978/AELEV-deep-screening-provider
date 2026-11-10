@@ -128,7 +128,7 @@ def read_profile(lock_path: Path, prompt_root: Path) -> Profile:
         or type(api.get("max_output_tokens")) is not int
         or not 256 <= cast(int, api["max_output_tokens"]) <= 128000
         or api.get("store") is not False
-        or api.get("media_profile") != "bounded-document-content-v1"
+        or api.get("media_profile") != "bounded-document-content-v2"
         or not isinstance(profile, str)
         or re.fullmatch(r"[a-z0-9][a-z0-9-]{1,63}", profile) is None
         or not isinstance(prompt_digest, str)

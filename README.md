@@ -6,7 +6,7 @@ material over mutually authenticated HTTPS and calls the OpenAI Responses API.
 Model ID, prompt and credential remain provider-owned and never cross the
 opaque port.
 
-The v0.2.0 candidate accepts bounded owner-supplied PDF, spreadsheet and image
+The v0.2.1 candidate accepts bounded owner-supplied PDF, spreadsheet and image
 bytes through that port. It verifies their SHA-256, binds them to the supplied
 document URL, and creates provider-owned inline content parts. It does not fetch
 source URLs or persistently upload files. Live multimedia admission remains open.
