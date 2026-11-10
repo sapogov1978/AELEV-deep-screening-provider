@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "status": "BOUNDED_PROVIDER_EVALUATION_PASS",
+  "owner": "deep-screening",
+  "image": "ghcr.io/sapogov1978/aelev-deep-screening-provider@sha256:f8c1d79e1442bee71e588dd6ecdc67d34c992e3a42f58b4ac42ce2f8309e496f",
+  "release_digest": "sha256:f979b5590a85d75741c2382b4be299ab9cdcd6c0cf3c578394b1046fdc8437b7",
+  "live_architecture": "linux/arm64",
+  "anonymous_mtls_rejected": true,
+  "wrong_release_rejected_before_inference": true,
+  "isolated_test_cleanup_preserved": true,
+  "production_identities_verified": false,
+  "owner_admission": "PENDING_OWNER_DEPLOYMENT_GATE",
+  "full_platform_production_ready": false,
+  "evidence_scope": "real queued public material plus explicitly withheld-evidence regressions; provider-only replay, not a full owner-worker E2E",
+  "raw_reports": [
+    {
+      "path": "/var/tmp/aelev-production-admission.wDuzQd/deep-mtls/deep-screening-quality.json",
+      "sha256": "f6cab3386fe1a41fc496c76711bfcef568a8d5401e8c074c3b5d2e2f4d2f25ea",
+      "original_status": "BOUNDED_EVAL_PASS"
+    }
+  ],
+  "results": [
+    {
+      "case_id": "real-collected-queue-site-surface",
+      "job_id": "eed64507-005f-5f0b-a217-c802af4fb391",
+      "http_status": 200,
+      "initial_expected": "SUITABLE",
+      "observed": "SUITABLE",
+      "request_sha256": "9ef9e4417407f8e6856acd9447cdca96b17cebb155d339cf681ce6abb685d4d2",
+      "output_sha256": "8ea6789d1b2c60f011f345ad680cc861da8d6b4b7a73e65f998f5cd4856399f7",
+      "elapsed_seconds": 7.745,
+      "semantic_review": "PASS"
+    },
+    {
+      "case_id": "same-target-evidence-withheld",
+      "job_id": "eed64507-005f-5f0b-a217-c802af4fb391",
+      "http_status": 200,
+      "initial_expected": "REVIEW",
+      "observed": "REVIEW",
+      "request_sha256": "bdc9699241b0c725bc9cf1e651370220a3760bd727c84607929a446c4e3425cd",
+      "output_sha256": "0e7b0d431ffa5380f08047d3b50ab56cee60724ebf279bdcc8bdabdf15db95d5",
+      "elapsed_seconds": 2.528,
+      "semantic_review": "PASS"
+    }
+  ],
+  "evidence_binding": "All returned URLs and evidence digests matched supplied owner-collected documents.",
+  "unverified_media": [
+    "PDF",
+    "spreadsheets",
+    "images",
+    "multilingual documents"
+  ]
+}

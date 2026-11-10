@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Recorded exact v0.1.0 signature, native arm64 mTLS and real collected HTML
+  evidence-binding evaluation. Broader media and owner production admission
+  remain explicit gates.
 - Recomputed prompt, execution and neutral release digests after canonical
   single-newline file normalization.
 - Created an independent OpenAI Responses API provider for the opaque Deep
