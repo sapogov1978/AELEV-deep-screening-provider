@@ -30,4 +30,8 @@ jobs:
       - name: Validate Docker test target
         run: docker build --target test .
       - name: Validate runtime image build without credentials or startup
-        run: docker build --target runtime .
+        run: docker build --target runtime --tag aelev-provider-health-test:ci .
+      - name: Reject false healthy with a placeholder key and no network
+        env:
+          AELEV_PROVIDER_TEST_IMAGE: aelev-provider-health-test:ci
+        run: poetry run pytest -q test/test_image_health.py

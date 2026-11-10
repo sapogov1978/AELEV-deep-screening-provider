@@ -11,6 +11,7 @@ import uvicorn
 
 from .app import create_app
 from .engine import Engine, Settings, read_profile, release_digest
+from .health import clear_readiness, healthy, record_readiness
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -29,11 +30,13 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "command",
-        choices=("serve", "verify-config", "print-release-digest"),
+        choices=("serve", "verify-config", "print-release-digest", "healthcheck"),
         nargs="?",
         default="serve",
     )
     args = parser.parse_args()
+    if args.command == "healthcheck":
+        raise SystemExit(0 if healthy() else 1)
     lock, prompts, release = paths()
     if args.command == "verify-config":
         read_profile(lock, prompts)
@@ -42,6 +45,7 @@ def main() -> None:
     if args.command == "print-release-digest":
         print(release_digest(release))
         return
+    clear_readiness()
     digest = release_digest(release)
     engine: Engine | None = None
     blocker: str | None = None
@@ -56,6 +60,7 @@ def main() -> None:
     )
     try:
         app = create_app(engine, digest, blocker)
+        record_readiness(engine is not None)
         if os.environ.get("AELEV_PROVIDER_INSECURE_HTTP") == "1":
             uvicorn.run(app, host="0.0.0.0", port=18486, access_log=False)
         else:
@@ -70,6 +75,7 @@ def main() -> None:
                 ssl_cert_reqs=ssl.CERT_REQUIRED,
             )
     finally:
+        clear_readiness()
         if engine is not None:
             engine.close()
 

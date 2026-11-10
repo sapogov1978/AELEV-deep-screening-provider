@@ -38,6 +38,6 @@ COPY --chown=10001:10001 prompts ./prompts
 RUN chmod 0555 ./prompts && chmod 0444 ./prompts/*.txt
 USER 10001:10001
 RUN python -m aelev_deep_screening_provider verify-config
-HEALTHCHECK --interval=10s --timeout=5s --retries=3 CMD ["python", "-c", "import socket; socket.create_connection(('127.0.0.1',18486),3).close()"]
+HEALTHCHECK --interval=10s --timeout=5s --retries=3 CMD ["python", "-m", "aelev_deep_screening_provider", "healthcheck"]
 ENTRYPOINT ["python", "-m", "aelev_deep_screening_provider"]
 CMD ["serve"]
