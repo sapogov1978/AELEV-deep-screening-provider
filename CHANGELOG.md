@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Return bounded HTTP 503 `PROVIDER_BUSY` for overlapping inference rather than
+  queueing behind the active upstream call. HTTP and timeout tests prove a busy
+  request makes no second API call and failures release provider capacity.
 - Added bounded PDF, spreadsheet and image content parts behind the unchanged
   opaque compute envelope. Supplied document bytes are bound to their URL and
   SHA-256 before inference; the provider performs no document fetch or persistent

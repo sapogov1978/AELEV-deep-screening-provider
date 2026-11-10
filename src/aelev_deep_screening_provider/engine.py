@@ -255,18 +255,21 @@ class Engine:
             "store": False,
             "text": {"format": OUTPUT_FORMAT},
         }
+        if not self._lock.acquire(blocking=False):
+            raise ProviderUnavailable("PROVIDER_BUSY")
         try:
-            with self._lock:
-                result = self._client.post(
-                    self.settings.profile.endpoint,
-                    headers={"Authorization": f"Bearer {self.settings.api_key}"},
-                    json=payload,
-                    timeout=self.settings.timeout,
-                )
+            result = self._client.post(
+                self.settings.profile.endpoint,
+                headers={"Authorization": f"Bearer {self.settings.api_key}"},
+                json=payload,
+                timeout=self.settings.timeout,
+            )
         except httpx.TimeoutException as error:
             raise ProviderUnavailable("PROVIDER_DEADLINE_EXCEEDED") from error
         except httpx.HTTPError as error:
             raise ProviderUnavailable("PROVIDER_RUNTIME_UNAVAILABLE") from error
+        finally:
+            self._lock.release()
         if result.status_code in {401, 403, 429} or result.status_code >= 500:
             raise ProviderUnavailable("PROVIDER_RUNTIME_UNAVAILABLE")
         if result.status_code != 200:

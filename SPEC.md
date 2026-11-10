@@ -64,6 +64,11 @@ Those account-level properties remain admission gates.
 
 ## Readiness and release
 
+One upstream inference is active at a time. An overlapping inference returns
+HTTP 503 `PROVIDER_BUSY` immediately without a second API call or an internal
+waiting queue. The functional owner retains retry responsibility. Timeouts and
+transport failures release the capacity for subsequent requests.
+
 Local readiness validates immutable configuration and a non-placeholder secret
 without performing a billable upstream probe. Docker healthcheck requires the
 serving process's initialized inference state, a live process and the bound
