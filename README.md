@@ -9,7 +9,9 @@ opaque port.
 The v0.2.1 candidate accepts bounded owner-supplied PDF, spreadsheet and image
 bytes through that port. It verifies their SHA-256, binds them to the supplied
 document URL, and creates provider-owned inline content parts. It does not fetch
-source URLs or persistently upload files. Live multimedia admission remains open.
+source URLs or persistently upload files. Its bounded real-material
+[evaluation](docs/audit/provider-evaluation-v0.2.1-20261110.md) passed content
+review; image security and deployed-owner admission remain open.
 
 The initial lock selects `gpt-6.1-sol`, medium reasoning, `store=false` and a
 strict JSON schema. The neutral [release.json](release.json) intentionally

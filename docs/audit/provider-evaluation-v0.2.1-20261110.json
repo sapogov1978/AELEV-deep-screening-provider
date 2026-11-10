@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "status": "BOUNDED_MULTIMEDIA_QUALITY_PASS_SECURITY_BLOCKED",
+  "candidate_tag": "v0.2.1",
+  "owner": "deep-screening",
+  "image": "ghcr.io/sapogov1978/aelev-deep-screening-provider@sha256:922bf3fbb4e2e944fdf1eebf93bef12d1dccaf3e1e41fdd30433e1869cabc2d2",
+  "artifact_source_commit": "6e5cde6f57bfe1f7278fd93f3b240d8469e88bb5",
+  "release_digest": "sha256:f979b5590a85d75741c2382b4be299ab9cdcd6c0cf3c578394b1046fdc8437b7",
+  "architecture": "linux/arm64",
+  "started_at": "2026-11-10T22:35:22.959439+00:00",
+  "finished_at": "2026-11-10T22:41:53.128787+00:00",
+  "corpus_sha256": "dd2a79f3bb07d2ff1446b706225266d52676a70bb83f859fbd787e03851ac140",
+  "case_count": 7,
+  "semantic_reviewer": "Codex",
+  "scope": "Isolated provider replay of real retained queue HTML plus evaluator-supplied public binary files on the same accepted target; not owner-worker collection or queue E2E.",
+  "hash_format": "SHA-256 of UTF-8 JSON with sorted keys, compact separators and ensure_ascii=false; hashes cover complete opaque envelopes",
+  "cases": [
+    {
+      "id": "real-collected-queue-site-surface",
+      "expected": "SUITABLE",
+      "observed": "SUITABLE",
+      "request_sha256": "9ef9e4417407f8e6856acd9447cdca96b17cebb155d339cf681ce6abb685d4d2",
+      "response_sha256": "a96f5dc7471778bab0a58382e3b2cea5e28a76999cac0d68a954b12d1552318a",
+      "elapsed_seconds": 11.228,
+      "semantic_review": "PASS: access points and digests match the four retained HTML documents; no unobserved underlying articles claimed."
+    },
+    {
+      "id": "same-target-evidence-withheld",
+      "expected": "REVIEW",
+      "observed": "REVIEW",
+      "request_sha256": "bdc9699241b0c725bc9cf1e651370220a3760bd727c84607929a446c4e3425cd",
+      "response_sha256": "6c4493c00e381de854a2fa38f504ea6de62fb1617a35d0db081de3718dc63b15",
+      "elapsed_seconds": 5.341,
+      "semantic_review": "PASS: no candidates; missing documents explicitly prevent a decision."
+    },
+    {
+      "id": "real-media-definitions-pdf",
+      "expected": [
+        "SUITABLE",
+        "REVIEW"
+      ],
+      "observed": "REVIEW",
+      "request_sha256": "9935959d0bc9f942a8e3c4c24788fcf72b989663163a8e526b9e00a61a220b73",
+      "response_sha256": "3a56c122d844510dd9dd24d0fff41ccc8f914353dd17af81b29db89296052869",
+      "elapsed_seconds": 19.689,
+      "semantic_review": "PASS: correctly identifies the two-page variable definitions and distinguishes documentation from observed series values."
+    },
+    {
+      "id": "real-media-data-csv",
+      "expected": "SUITABLE",
+      "observed": "SUITABLE",
+      "request_sha256": "9a60761187fcf3fdd46fdedfc3eab3d0ea2faa8988251ff7c509aedcc81dca88",
+      "response_sha256": "47d6f78e103c8ce0b2052edfda3f32d68cc7738ae62f37dd8342ba01ae66fddf",
+      "elapsed_seconds": 8.63,
+      "semantic_review": "PASS: identifies 111 quarterly records and the observed date range; explicitly limits claims to the supplied parsed projection."
+    },
+    {
+      "id": "real-media-data-xlsx",
+      "expected": "SUITABLE",
+      "observed": "SUITABLE",
+      "request_sha256": "70937532111dd8e845a415ab5c4bfdafe83f43282817c4cb87bf6c6c32753066",
+      "response_sha256": "9476f357e5164d16a5964e2cb10f1a75b103b75980d8ac86016eb2b5dc977192",
+      "elapsed_seconds": 17.675,
+      "semantic_review": "PASS: identifies figure data and the literal G.17 reference in Data_Sources; does not claim to have fetched that reference or reviewed embedded charts."
+    },
+    {
+      "id": "real-media-figure-png",
+      "expected": "SUITABLE",
+      "observed": "SUITABLE",
+      "request_sha256": "27e09fd2c2cd6a8b43276974f3ca6fa2fee6c3b77aa43af3d3ef7cafa7147149",
+      "response_sha256": "ae6b8e72958f4f62b27e6d71315fb7b423f2c0e82f30a61bb964e13c029ba5bb",
+      "elapsed_seconds": 12.776,
+      "semantic_review": "PASS: image description matches the viewed chart metric and model-labelled time axis; underlying numeric data and article remain unknown."
+    },
+    {
+      "id": "real-media-spanish-pdf",
+      "expected": [
+        "SUITABLE",
+        "REVIEW"
+      ],
+      "observed": "REVIEW",
+      "request_sha256": "ca5b8a3980467391a95ad5f9bbb124179c3fd0f812ea38eff4a8d2cdf4ad1526",
+      "response_sha256": "35277fa140944ffb7c9ccdeefbd447641e949d5a4ecbd30b803a3d8dfe7228c1",
+      "elapsed_seconds": 50.427,
+      "semantic_review": "PASS: identifies the one-page Spanish advice brochure; does not present static advice as an established observation source."
+    }
+  ],
+  "harness_correction": "The initial validator rejected G.17 because only separately projected links were enumerated. The literal URL was verified in the digest-bound XLSX XML. Offline revalidation accepts only exact-target URLs present in that attachment. The original failed report is retained, inputs and expected decisions were not changed, and only the two unexecuted cases required another run.",
+  "supply_chain": {
+    "source_audit_run": 42909018823,
+    "release_run": 42909493948,
+    "signature_identity": "https://github.com/sapogov1978/AELEV-deep-screening-provider/.github/workflows/release.yml@refs/tags/v0.2.1",
+    "signature_issuer": "https://token.actions.githubusercontent.com",
+    "platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ]
+  },
+  "security": {
+    "schema_version": 1,
+    "recorded_at": "2026-11-10T22:43:09.016829+00:00",
+    "image_id": "sha256:922bf3fbb4e2e944fdf1eebf93bef12d1dccaf3e1e41fdd30433e1869cabc2d2",
+    "source_commit": "6e5cde6f57bfe1f7278fd93f3b240d8469e88bb5",
+    "working_tree_dirty": false,
+    "scanner": "Version: 0.76.1\nVulnerability DB:\n  Version: 2\n  UpdatedAt: 2026-11-10 19:01:23.081219346 +0000 UTC\n  NextUpdate: 2026-11-11 19:01:23.081218965 +0000 UTC\n  DownloadedAt: 2026-11-10 22:42:07.939275 +0000 UTC",
+    "severity_counts": {
+      "CRITICAL": 2,
+      "HIGH": 49,
+      "LOW": 96,
+      "MEDIUM": 113,
+      "UNKNOWN": 10
+    },
+    "vulnerability_gate": "BLOCKED",
+    "production_admission": "NOT_EVALUATED",
+    "files": {
+      "vulnerabilities.json": "c63faba83043ae04983032c7dece810944b84f0521afa5f872f957705b044b9b",
+      "sbom.cdx.json": "fbb8b94c4a98f0ad5d84fb9e23fc856b32b9430b0ee1cd6dea154c81cd440c1b"
+    }
+  },
+  "evidence_sha256": {
+    "deep-v021/deep-screening-quality.json": "0237059980fb7dc01dff0f39e2a7e67edd01e1277c3e0ad2bd9b01c61b9316c1",
+    "deep-v021-remaining/deep-screening-quality.json": "14f4df053effa79a6404924dad713bc49041df17a793e6309d2952d44e7cf416",
+    "deep-v021/offline-evidence-revalidation.json": "83ddd6b40f89e46291a2e8360a2842624f99e6324bc6e76dc6ec1f77a3cf607a",
+    "deep-media-source/manifest.json": "fd6bbc95dacaf29ad62920ccd33c8b85030379a5c2ac729a676a70ddb6fb44ba",
+    "deep-v021/signature.json": "1a02241424850ba72ea10f31cf800e98231deb92f08921fb38ad07cb25c1c43c",
+    "deep-v021/manifest.json": "922bf3fbb4e2e944fdf1eebf93bef12d1dccaf3e1e41fdd30433e1869cabc2d2",
+    "deep-v021/provenance.json": "612624de51d811fe91761d548dc3119f2f1c170c598a5553e57beb95f5e4225e",
+    "deep-v021/sbom.json": "84245c925aea000532d2ab044fd48b77e3a8cf095c46288e5599df4a9bb3bc79"
+  },
+  "anonymous_tls_rejected": true,
+  "wrong_release_rejected": true,
+  "mtls_scope": "ISOLATED_TEST_IDENTITIES",
+  "cleanup_preserved": true,
+  "queue_resume_issued": false,
+  "raw_evidence_root": "/var/tmp/aelev-production-admission.wDuzQd",
+  "remaining_gates": [
+    "IMAGE_VULNERABILITY_ADMISSION",
+    "HARDENED_RUNTIME_EXACT_IMAGE_REEVALUATION",
+    "FUNCTIONAL_OWNER_BINARY_COLLECTION",
+    "PERMANENT_OWNER_IDENTITIES",
+    "OWNER_WORKER_E2E"
+  ]
+}

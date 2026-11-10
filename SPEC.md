@@ -64,6 +64,13 @@ Those account-level properties remain admission gates.
 
 ## Readiness and release
 
+The runtime uses the same Python 3.13.7 Debian Bookworm base as the builder,
+but copies only the locked application environment. Poetry, its build-only
+dependencies, pip and setuptools are excluded from runtime. Build and test
+stages continue to use pinned Poetry 2.2.1.
+The unused distribution SQLite library is excluded from runtime. The opaque
+provider has no SQL interface or durable database; owner storage is independent.
+
 One upstream inference is active at a time. An overlapping inference returns
 HTTP 503 `PROVIDER_BUSY` immediately without a second API call or an internal
 waiting queue. The functional owner retains retry responsibility. Timeouts and

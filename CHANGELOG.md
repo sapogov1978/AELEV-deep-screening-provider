@@ -2,6 +2,22 @@
 
 ## Unreleased
 
+- Added an immutable-image runtime probe and CI receipt for both Python
+  environments, absent build tools/SQLite, MiniZip and systemd-homed. It runs
+  without network or credentials and does not claim complete CVE admission.
+- Removed the unused distribution SQLite library from runtime after a dry-run
+  proved it has no dependent package removals. The provider exposes no SQL;
+  functional-owner storage, queues and application locks are unaffected.
+- Release builds refresh the OS-update stage instead of reusing its cache;
+  image builds assert build tools are absent from both Python environments.
+- Recorded seven real-material v0.2.1 inference calls with semantic review for
+  HTML, missing evidence, PDF, CSV, XLSX, PNG and Spanish PDF. Preserved the
+  initial harness failure and verified the XLSX URL directly in its source
+  bytes. Exact-image security scanning blocks production admission.
+- Isolated the runtime from the Poetry builder after exact-image scanning
+  found vulnerable build-only tools in the published image. The Python/OS and
+  application dependency locks are unchanged; global and virtualenv installers
+  are removed from the runtime. Distribution vulnerability admission remains open.
 - Raised the individual attachment limit to the existing 512 KiB aggregate
   budget after a real 256628-byte one-page Spanish PDF failed the initial
   128 KiB limit. The total decoded-byte budget and 1 MiB opaque input bound

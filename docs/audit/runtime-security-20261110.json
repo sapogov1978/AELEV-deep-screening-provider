@@ -1,0 +1,299 @@
+{
+  "schema_version": 1,
+  "status": "PRODUCTION_ADMISSION_BLOCKED",
+  "architecture": "linux/arm64",
+  "released_candidate_tag": "v0.2.1",
+  "released_candidate_image": "ghcr.io/sapogov1978/aelev-deep-screening-provider@sha256:922bf3fbb4e2e944fdf1eebf93bef12d1dccaf3e1e41fdd30433e1869cabc2d2",
+  "released_candidate_scan": {
+    "schema_version": 1,
+    "recorded_at": "2026-11-10T22:43:09.016829+00:00",
+    "image_id": "sha256:922bf3fbb4e2e944fdf1eebf93bef12d1dccaf3e1e41fdd30433e1869cabc2d2",
+    "source_commit": "6e5cde6f57bfe1f7278fd93f3b240d8469e88bb5",
+    "working_tree_dirty": false,
+    "scanner": "Version: 0.76.1\nVulnerability DB:\n  Version: 2\n  UpdatedAt: 2026-11-10 19:01:23.081219346 +0000 UTC\n  NextUpdate: 2026-11-11 19:01:23.081218965 +0000 UTC\n  DownloadedAt: 2026-11-10 22:42:07.939275 +0000 UTC",
+    "severity_counts": {
+      "CRITICAL": 2,
+      "HIGH": 49,
+      "LOW": 96,
+      "MEDIUM": 113,
+      "UNKNOWN": 10
+    },
+    "vulnerability_gate": "BLOCKED",
+    "production_admission": "NOT_EVALUATED",
+    "files": {
+      "vulnerabilities.json": "c63faba83043ae04983032c7dece810944b84f0521afa5f872f957705b044b9b",
+      "sbom.cdx.json": "fbb8b94c4a98f0ad5d84fb9e23fc856b32b9430b0ee1cd6dea154c81cd440c1b"
+    }
+  },
+  "local_hardened_image_id": "sha256:7f67e463cde83094f45557a78c042d600260d732282b6ede249531c540467390",
+  "local_hardened_scan": {
+    "schema_version": 1,
+    "recorded_at": "2026-11-10T22:54:26.285352+00:00",
+    "image_id": "sha256:7f67e463cde83094f45557a78c042d600260d732282b6ede249531c540467390",
+    "source_commit": "6e5cde6f57bfe1f7278fd93f3b240d8469e88bb5",
+    "working_tree_dirty": true,
+    "scanner": "Version: 0.76.1\nVulnerability DB:\n  Version: 2\n  UpdatedAt: 2026-11-10 19:01:23.081219346 +0000 UTC\n  NextUpdate: 2026-11-11 19:01:23.081218965 +0000 UTC\n  DownloadedAt: 2026-11-10 22:42:07.939275 +0000 UTC",
+    "severity_counts": {
+      "CRITICAL": 1,
+      "HIGH": 35,
+      "LOW": 88,
+      "MEDIUM": 96,
+      "UNKNOWN": 10
+    },
+    "vulnerability_gate": "BLOCKED",
+    "production_admission": "NOT_EVALUATED",
+    "files": {
+      "vulnerabilities.json": "1f67fcc842514fa3d56e0906b5534198627f71e00604bbd842b60084158c27cd",
+      "sbom.cdx.json": "5248a1c8ae30900ea628c6bc98920ccf3f6d1ebeea6718d3d057de9b13a818e4"
+    }
+  },
+  "local_hardened_footprint": {
+    "schema_version": 1,
+    "status": "RUNTIME_SURFACE_PASS",
+    "recorded_at": "2026-11-10T22:56:14.989897+00:00",
+    "image": "sha256:7f67e463cde83094f45557a78c042d600260d732282b6ede249531c540467390",
+    "image_id": "sha256:7f67e463cde83094f45557a78c042d600260d732282b6ede249531c540467390",
+    "architecture": "linux/arm64",
+    "probe_source_sha256": "462c90759c1a546ecb0c20625c51bd8955e0436eecd13590f7ae7697af056ac6",
+    "network": "none",
+    "credential_mounts": false,
+    "upstream_calls": false,
+    "probes": [
+      {
+        "python": "/usr/local/bin/python",
+        "python_version": "3.13.7",
+        "build_tools_absent": true,
+        "sqlite_library_absent": true,
+        "minizip_library_and_vulnerable_symbol_absent": true,
+        "systemd_homed_absent": true
+      },
+      {
+        "python": "/opt/aelev/.venv/bin/python",
+        "python_version": "3.13.7",
+        "build_tools_absent": true,
+        "sqlite_library_absent": true,
+        "minizip_library_and_vulnerable_symbol_absent": true,
+        "systemd_homed_absent": true
+      }
+    ],
+    "scope": "Runtime footprint only; not a complete vulnerability admission."
+  },
+  "local_hardened_image_is_released": false,
+  "source_state": "Diagnostic build measured before committing the runtime correction; base commit and dirty state are retained in the raw receipt. Exact runtime input files are bound below. This is not a published source attestation.",
+  "runtime_source_files_sha256": {
+    "Dockerfile": "9dd52dccfc804455781e4903ceb82c2592197aa9fd13329d7ed6f40c8700f544",
+    "poetry.lock": "5f69f6ec0ae7ca9daa3514d76b70efc1e6891d68ce3c31370b9993a0e3bce22b",
+    "pyproject.toml": "64618246225d63b09d207ac187f6275b3210c45b88776ea83f147c64e6732289",
+    "provider.lock.json": "9f516fc3a16fd33e9a03c518ada6ea5a493f8f191011c6f8dd2365079b789f36",
+    "tools/runtime_surface_probe.py": "462c90759c1a546ecb0c20625c51bd8955e0436eecd13590f7ae7697af056ac6",
+    "src/aelev_deep_screening_provider/__init__.py": "aecc1815495051fb9cd640d10ec35182ac802034b91e9c05731039b9b0b048c7",
+    "src/aelev_deep_screening_provider/__main__.py": "2356126e7ad200d1194a6c680c29030bf1841a12917de0bbb40014bd72dcfac3",
+    "src/aelev_deep_screening_provider/app.py": "a2e43473de63bee71081a6f97e4fcb7e4f0c9f66dbc2b02dddeafa42bc65c25a",
+    "src/aelev_deep_screening_provider/contract.py": "dafceb2623b487c0a526fdd1e42d26557e5c41810ca33cffc6c3ec3a20a00b2a",
+    "src/aelev_deep_screening_provider/engine.py": "d66a859964bfc8ebe71d3e99768acf3c33fc5faa1a0d7e40950e608a83a50e75",
+    "src/aelev_deep_screening_provider/health.py": "45d9a50183553b908d8a78d6d851b731e313b22834ae1e2a68d773fdac29e328",
+    "src/aelev_deep_screening_provider/media.py": "3e8ebb9ed73a3a9974a7a40f8e4339ba79e1d3c3e765e84f32628378d2ac71fa",
+    "prompts/sensor-surface-v1.txt": "6d69e666081fc83e24e192ddf11f1083027075771e8df38d80ae548d23737d84",
+    "prompts/sensor-surface-v2.txt": "7ddc42e7dde5dcdef5ffab9f14fc340b53028fab195b0a50b6c008f401b9cf02"
+  },
+  "findings": [
+    {
+      "id": "CVE-2026-53613",
+      "severity": "HIGH",
+      "packages": [
+        "bsdutils@1:2.38.1-5+deb12u3",
+        "libblkid1@2.38.1-5+deb12u3",
+        "libmount1@2.38.1-5+deb12u3",
+        "libsmartcols1@2.38.1-5+deb12u3",
+        "libuuid1@2.38.1-5+deb12u3",
+        "mount@2.38.1-5+deb12u3",
+        "util-linux@2.38.1-5+deb12u3",
+        "util-linux-extra@2.38.1-5+deb12u3"
+      ],
+      "fixed_version": null,
+      "status": "affected",
+      "primary_url": "https://security-tracker.debian.org/tracker/CVE-2026-53613",
+      "assessment": {
+        "status": "OPEN",
+        "justification": "Requires an individual applicability review or a verified compatible fix; no blanket exclusion."
+      }
+    },
+    {
+      "id": "CVE-2026-53615",
+      "severity": "HIGH",
+      "packages": [
+        "bsdutils@1:2.38.1-5+deb12u3",
+        "libblkid1@2.38.1-5+deb12u3",
+        "libmount1@2.38.1-5+deb12u3",
+        "libsmartcols1@2.38.1-5+deb12u3",
+        "libuuid1@2.38.1-5+deb12u3",
+        "mount@2.38.1-5+deb12u3",
+        "util-linux@2.38.1-5+deb12u3",
+        "util-linux-extra@2.38.1-5+deb12u3"
+      ],
+      "fixed_version": null,
+      "status": "affected",
+      "primary_url": "https://security-tracker.debian.org/tracker/CVE-2026-53615",
+      "assessment": {
+        "status": "OPEN",
+        "justification": "Requires an individual applicability review or a verified compatible fix; no blanket exclusion."
+      }
+    },
+    {
+      "id": "CVE-2026-78410",
+      "severity": "HIGH",
+      "packages": [
+        "bsdutils@1:2.38.1-5+deb12u3",
+        "libblkid1@2.38.1-5+deb12u3",
+        "libmount1@2.38.1-5+deb12u3",
+        "libsmartcols1@2.38.1-5+deb12u3",
+        "libuuid1@2.38.1-5+deb12u3",
+        "mount@2.38.1-5+deb12u3",
+        "util-linux@2.38.1-5+deb12u3",
+        "util-linux-extra@2.38.1-5+deb12u3"
+      ],
+      "fixed_version": null,
+      "status": "affected",
+      "primary_url": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "assessment": {
+        "status": "OPEN",
+        "justification": "Requires an individual applicability review or a verified compatible fix; no blanket exclusion."
+      }
+    },
+    {
+      "id": "CVE-2026-41992",
+      "severity": "HIGH",
+      "packages": [
+        "gzip@1.12-1"
+      ],
+      "fixed_version": null,
+      "status": "fix_deferred",
+      "primary_url": "https://security-tracker.debian.org/tracker/CVE-2026-41992",
+      "assessment": {
+        "status": "OPEN",
+        "justification": "Requires an individual applicability review or a verified compatible fix; no blanket exclusion."
+      }
+    },
+    {
+      "id": "CVE-2026-54369",
+      "severity": "HIGH",
+      "packages": [
+        "libacl1@2.3.1-3"
+      ],
+      "fixed_version": null,
+      "status": "fix_deferred",
+      "primary_url": "https://security-tracker.debian.org/tracker/CVE-2026-54369",
+      "assessment": {
+        "status": "OPEN",
+        "justification": "Requires an individual applicability review or a verified compatible fix; no blanket exclusion."
+      }
+    },
+    {
+      "id": "CVE-2025-69720",
+      "severity": "HIGH",
+      "packages": [
+        "libncursesw6@6.4-4",
+        "libtinfo6@6.4-4",
+        "ncurses-base@6.4-4",
+        "ncurses-bin@6.4-4"
+      ],
+      "fixed_version": null,
+      "status": "affected",
+      "primary_url": "https://security-tracker.debian.org/tracker/CVE-2025-69720",
+      "assessment": {
+        "status": "OPEN",
+        "justification": "Requires an individual applicability review or a verified compatible fix; no blanket exclusion."
+      }
+    },
+    {
+      "id": "CVE-2026-16742",
+      "severity": "HIGH",
+      "packages": [
+        "libsystemd0@252.39-1~deb12u2",
+        "libudev1@252.39-1~deb12u2"
+      ],
+      "fixed_version": null,
+      "status": "fix_deferred",
+      "primary_url": "https://security-tracker.debian.org/tracker/CVE-2026-16742",
+      "assessment": {
+        "status": "NOT_AFFECTED",
+        "justification": "vulnerable_code_not_present",
+        "evidence": "The affected systemd-homed executable is absent. The finding concerns that service, not an arbitrary call to the installed systemd/udev library.",
+        "source": "https://security-tracker.debian.org/tracker/CVE-2026-16742"
+      }
+    },
+    {
+      "id": "CVE-2026-9538",
+      "severity": "HIGH",
+      "packages": [
+        "perl-base@5.36.0-7+deb12u4"
+      ],
+      "fixed_version": null,
+      "status": "fix_deferred",
+      "primary_url": "https://security-tracker.debian.org/tracker/CVE-2026-9538",
+      "assessment": {
+        "status": "OPEN",
+        "justification": "Requires an individual applicability review or a verified compatible fix; no blanket exclusion."
+      }
+    },
+    {
+      "id": "CVE-2023-45853",
+      "severity": "CRITICAL",
+      "packages": [
+        "zlib1g@1:1.2.13.dfsg-1"
+      ],
+      "fixed_version": null,
+      "status": "will_not_fix",
+      "primary_url": "https://security-tracker.debian.org/tracker/CVE-2023-45853",
+      "assessment": {
+        "status": "NOT_AFFECTED",
+        "justification": "vulnerable_code_not_present",
+        "evidence": "Both runtime interpreters confirmed no MiniZip library, pyminizip module or zipOpenNewFileInZip4_64 export in libz. Debian explicitly excludes contrib/minizip from the affected bookworm zlib binary.",
+        "source": "https://security-tracker.debian.org/tracker/CVE-2023-45853"
+      }
+    },
+    {
+      "id": "CVE-2026-76844",
+      "severity": "HIGH",
+      "packages": [
+        "zlib1g@1:1.2.13.dfsg-1"
+      ],
+      "fixed_version": null,
+      "status": "affected",
+      "primary_url": "https://security-tracker.debian.org/tracker/CVE-2026-76844",
+      "assessment": {
+        "status": "OPEN",
+        "justification": "Requires an individual applicability review or a verified compatible fix; no blanket exclusion."
+      }
+    },
+    {
+      "id": "CVE-2026-85091",
+      "severity": "HIGH",
+      "packages": [
+        "zlib1g@1:1.2.13.dfsg-1"
+      ],
+      "fixed_version": null,
+      "status": "affected",
+      "primary_url": "https://security-tracker.debian.org/tracker/CVE-2026-85091",
+      "assessment": {
+        "status": "OPEN",
+        "justification": "Requires an individual applicability review or a verified compatible fix; no blanket exclusion."
+      }
+    }
+  ],
+  "unresolved_high_package_findings": 33,
+  "unresolved_critical_package_findings": 0,
+  "raw_evidence_root": "/var/tmp/aelev-production-admission.wDuzQd",
+  "evidence_sha256": {
+    "deep-v021/security-arm64/evidence.json": "8d9a033c205fe7ce2009dea8c4bc7445274a3a13011c701d108df2ee463ef64c",
+    "deep-runtime-minimal/security-arm64/evidence.json": "163a1725ccdfd4dafb254ca46b00e3ea7ad37d727280b6035e8e69d6a8252ea9",
+    "deep-runtime-minimal/runtime-surface.json": "b559477d878c591de00ed7bca38a0b4e6132739d30fe0b95490b2267b204004b"
+  },
+  "remaining_gates": [
+    "INDIVIDUAL_REMAINING_CVE_ADMISSION",
+    "HARDENED_SIGNED_RELEASE_AND_SOURCE_CI",
+    "FINAL_LINUX_AMD64_AND_ARM64_SECURITY_EVIDENCE",
+    "FINAL_EXACT_IMAGE_QUALITY",
+    "FUNCTIONAL_OWNER_INTEGRATION"
+  ]
+}
