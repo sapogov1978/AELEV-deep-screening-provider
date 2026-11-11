@@ -10,8 +10,9 @@
   [provider-release-v0.1.1-20261110.md](docs/audit/provider-release-v0.1.1-20261110.md).
 - [x] Review bounded real PDF, spreadsheet, image and multilingual inference on
   candidate v0.2.1; see [evaluation](docs/audit/provider-evaluation-v0.2.1-20261110.md).
-- [ ] Close image vulnerability admission and verify the hardened exact release;
-  see [scoped pre-release evidence](docs/audit/runtime-security-20261111.md).
+- [x] Verify the hardened exact v0.2.2 release on both native architectures
+  against raw scans and the restricted reviewed execution profile; replay and
+  review all seven cases in the [final report](docs/audit/provider-release-v0.2.2-20261111.md).
 - [ ] Admit owner-collected binary inputs in the deployed functional service.
 - [ ] Complete functional-owner admission and deployed worker E2E.
 - [ ] Exercise the exact image with production mTLS identities.

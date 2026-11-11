@@ -1,0 +1,158 @@
+{
+  "schema_version": 2,
+  "status": "COMPONENT_RELEASE_VERIFIED",
+  "recorded_at": "2026-11-11T00:11:29.032678+00:00",
+  "release_tag": "v0.2.2",
+  "owner": "deep-screening",
+  "image": "ghcr.io/sapogov1978/aelev-deep-screening-provider@sha256:0a15ed0d7f91889cb50f95e2859d18e8829bc6f47be334b4b4bed9169a251a3b",
+  "artifact_source_commit": "b783bc53406aa4c5a1d04d941259ffa8bce57eac",
+  "live_architecture": "linux/arm64",
+  "corpus_sha256": "dd2a79f3bb07d2ff1446b706225266d52676a70bb83f859fbd787e03851ac140",
+  "case_count": 7,
+  "automated_checks": "PASS",
+  "semantic_reviewer": "Codex",
+  "quality_scope": "Frozen retained real queue material and policy, replayed through isolated mTLS; seven real HTML/binary cases, binary files supplied by evaluator. Not deployed owner collection, queue processing, or cascade E2E.",
+  "cases": [
+    {
+      "id": "real-collected-queue-site-surface",
+      "expected": "SUITABLE",
+      "observed": "SUITABLE",
+      "request_sha256": "9ef9e4417407f8e6856acd9447cdca96b17cebb155d339cf681ce6abb685d4d2",
+      "response_sha256": "09aafc5817f76f57c390bda2a769e8d196d54f17ee2cdb732cb18b3ef761372c",
+      "elapsed_seconds": 8.226,
+      "semantic_review": "PASS: Access points and exact evidence digests match retained HTML; unobserved articles and navigation remain unknown."
+    },
+    {
+      "id": "same-target-evidence-withheld",
+      "expected": "REVIEW",
+      "observed": "REVIEW",
+      "request_sha256": "bdc9699241b0c725bc9cf1e651370220a3760bd727c84607929a446c4e3425cd",
+      "response_sha256": "97dd63b2667c4883729679a63e7e66fac51acd3daf6e7959a11a98bdead02f00",
+      "elapsed_seconds": 2.631,
+      "semantic_review": "PASS: No candidates are fabricated when no documents are supplied."
+    },
+    {
+      "id": "real-media-definitions-pdf",
+      "expected": [
+        "SUITABLE",
+        "REVIEW"
+      ],
+      "observed": "REVIEW",
+      "request_sha256": "9935959d0bc9f942a8e3c4c24788fcf72b989663163a8e526b9e00a61a220b73",
+      "response_sha256": "c04670e45172089536a65b82ef92426cf89ed482823893a8c5298cc64b50753f",
+      "elapsed_seconds": 6.256,
+      "semantic_review": "PASS: Two-page definitions are correctly distinguished from observed series values and unobserved file locations."
+    },
+    {
+      "id": "real-media-data-csv",
+      "expected": "SUITABLE",
+      "observed": "SUITABLE",
+      "request_sha256": "9a60761187fcf3fdd46fdedfc3eab3d0ea2faa8988251ff7c509aedcc81dca88",
+      "response_sha256": "fad706fa21caf43d246279f9dbf59cae6cee5e5c075f22dbfc6323387c754c1e",
+      "elapsed_seconds": 8.447,
+      "semantic_review": "PASS: 111 quarterly rows and the 1999-03-31 to 2026-09-30 range match source bytes; units and cadence remain unknown."
+    },
+    {
+      "id": "real-media-data-xlsx",
+      "expected": "SUITABLE",
+      "observed": "SUITABLE",
+      "request_sha256": "70937532111dd8e845a415ab5c4bfdafe83f43282817c4cb87bf6c6c32753066",
+      "response_sha256": "3803336c3d6bc333fe94c657cb8858bfb0a01a04b8a88e97f826d39b29ad3d39",
+      "elapsed_seconds": 14.26,
+      "semantic_review": "PASS: Data_Sources and eleven figure tabs match the workbook; G.17 is a literal digest-bound reference, not a claimed fetched page."
+    },
+    {
+      "id": "real-media-figure-png",
+      "expected": "SUITABLE",
+      "observed": "SUITABLE",
+      "request_sha256": "27e09fd2c2cd6a8b43276974f3ca6fa2fee6c3b77aa43af3d3ef7cafa7147149",
+      "response_sha256": "ef604a50fa1c0473f1847dc30f2d37cdea64ee02d5485effb1b86bff5c47bf04",
+      "elapsed_seconds": 8.159,
+      "semantic_review": "PASS: The reviewed chart shows human task hours at 50 percent AI success over time; exact underlying point values remain unknown."
+    },
+    {
+      "id": "real-media-spanish-pdf",
+      "expected": [
+        "SUITABLE",
+        "REVIEW"
+      ],
+      "observed": "REVIEW",
+      "request_sha256": "ca5b8a3980467391a95ad5f9bbb124179c3fd0f812ea38eff4a8d2cdf4ad1526",
+      "response_sha256": "b18b566534027fe72d5297883558a85af667faa42998c15410fe05a666135310",
+      "elapsed_seconds": 7.586,
+      "semantic_review": "PASS: The one-page Spanish credit advice is correctly identified and not presented as an established observation source."
+    }
+  ],
+  "security": {
+    "status": "SCOPED_SECURITY_PASS",
+    "architectures": {
+      "linux/amd64": {
+        "status": "SCOPED_SECURITY_PASS",
+        "raw_severity_counts": {
+          "CRITICAL": 1,
+          "HIGH": 35,
+          "LOW": 88,
+          "MEDIUM": 96,
+          "UNKNOWN": 10
+        },
+        "unresolved_high_critical_package_findings": 0,
+        "reviewed_profile_sha256": "43e3fc7263835979ff325579897d51e1bdfcf19ac1172ec3bcac678efc94507b"
+      },
+      "linux/arm64": {
+        "status": "SCOPED_SECURITY_PASS",
+        "raw_severity_counts": {
+          "CRITICAL": 1,
+          "HIGH": 35,
+          "LOW": 88,
+          "MEDIUM": 96,
+          "UNKNOWN": 10
+        },
+        "unresolved_high_critical_package_findings": 0,
+        "reviewed_profile_sha256": "43e3fc7263835979ff325579897d51e1bdfcf19ac1172ec3bcac678efc94507b"
+      }
+    },
+    "scope": "Default reviewed opaque Python entrypoint, UID 10001, read-only root, zero effective capabilities, no-new-privileges, empty fstab. Findings remain in raw scans; no claim that distribution packages are patched.",
+    "future_unreviewed_high_critical": "BLOCK"
+  },
+  "supply_chain": {
+    "image": "ghcr.io/sapogov1978/aelev-deep-screening-provider@sha256:0a15ed0d7f91889cb50f95e2859d18e8829bc6f47be334b4b4bed9169a251a3b",
+    "source": "b783bc53406aa4c5a1d04d941259ffa8bce57eac",
+    "signature_identity": "https://github.com/sapogov1978/AELEV-deep-screening-provider/.github/workflows/release.yml@refs/tags/v0.2.2",
+    "platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "status": "SUPPLY_CHAIN_PASS",
+    "source_audit_run": 42924970779,
+    "release_run": 42925400304
+  },
+  "evidence_sha256": {
+    "release-digest.txt": "3ca8930961b2063b0ed27c1f01fef3fc7ce363d141f3d2f918466983ecd400e4",
+    "signature.json": "5765c11ab84e81e441684538b62041e2ac72470de2f088588f71224fadbf9acb",
+    "manifest.json": "0a15ed0d7f91889cb50f95e2859d18e8829bc6f47be334b4b4bed9169a251a3b",
+    "provenance.json": "a771f0725837c457218b0d4af7f435750fe07a29b56e3cef00b3b3bc0300c251",
+    "sbom.json": "2ec1aaf658c86ad913b6cdd4db4b3ff8a955df367fb348c038650f38a27347f2",
+    "supply-chain-verification.json": "2adc547a007101003fc0fcc48d11453569a7ae0cfc76e1d1d8afd6bd58bfdf8c",
+    "security-amd64.json": "954b375d3c3d6d3a2b54b2220aaf8e7afe247daf6450fdc93a949c2618bc7b69",
+    "security-arm64.json": "6c330d4897f3cc2b44462ee2c0f590456d92080cf7de092f33e7f3af9865ac1b",
+    "vulnerabilities-amd64.json": "e7cf394acf5f10ab82ae142c76607e0ca3099624622d2198d324addd67adc63d",
+    "vulnerabilities-arm64.json": "f0cec717ea6739e7e16ef5d027ac8f9a4b50721755bb47b9f5c9cf31e955686b",
+    "deep-screening-quality.json": "013b8d815b358e72228d852ac3c62176a78cd7cc45f0ad17ee2815625d7cb56f"
+  },
+  "raw_evidence_path": "/var/tmp/aelev-production-admission.wDuzQd/deep-v022/deep-screening-quality.json",
+  "queue_resume_issued": false,
+  "remaining_gates": [
+    "FUNCTIONAL_OWNER_BINARY_COLLECTION",
+    "FUNCTIONAL_OWNER_POLICY_SCOPE_ADMISSION",
+    "PERMANENT_OWNER_IDENTITIES",
+    "OWNER_WORKER_E2E"
+  ],
+  "anonymous_tls_rejected": true,
+  "wrong_release_rejected": true,
+  "cleanup_preserved": true,
+  "quality_limitations": [
+    "Descriptions are capped at 160 characters and some final clauses truncate; candidate URLs, digests and supporting observations remain intact.",
+    "Static PDFs allowed REVIEW or SUITABLE before inference; both returned REVIEW. CSV, XLSX and PNG required SUITABLE.",
+    "XLSX source links are independently checked against literal exact-target URLs in digest-bound workbook XML; request payload is unchanged."
+  ]
+}

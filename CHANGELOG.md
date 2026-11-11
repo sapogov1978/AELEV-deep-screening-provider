@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Verified signed v0.2.2 on both native architectures against the reviewed
+  runtime profile, and reviewed all seven frozen real-material inference
+  cases. Reports retain raw CVEs, bounded descriptions and unknown coverage;
+  deployed owner collection, identities and worker admission remain open.
 - Added source/lock/gate-bound CVE applicability evidence for the restricted
   provider entrypoint. Raw findings remain visible; unknown HIGH/CRITICAL,
   changed reviewed code/dependencies and missing controls block admission.

@@ -29,9 +29,10 @@ functional owner's budgets, then supply their exact URL, MIME type, base64 and
 SHA-256. The provider accepts at most 512 KiB per attachment and 512 KiB total;
 the whole input remains bounded to 1 MiB. Rejected media must remain visible as
 unknown or blocked scope; do not relabel a text-only projection as image/PDF
-understanding. The v0.2.1 candidate has a separately reviewed seven-case
-[real-material evaluation](docs/audit/provider-evaluation-v0.2.1-20261110.md).
-It does not close image security or deployed owner-collection admission.
+understanding. Release v0.2.2 has a separately reviewed seven-case
+[real-material evaluation](docs/audit/provider-release-v0.2.2-20261111.md)
+and a verified restricted security profile for both native architectures.
+It does not close deployed owner-collection or policy-scope admission.
 
 A healthy process proves only local configuration. Before selecting the release
 digest in Deep Screening, run representative sensor-surface evals with the exact
