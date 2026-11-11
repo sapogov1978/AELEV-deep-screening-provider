@@ -1,17 +1,19 @@
 {
   "schema_version": 1,
   "profile": "opaque-python-provider-bookworm-v1",
-  "reviewed_at": "2026-11-10T23:25:15.038370+00:00",
+  "reviewed_at": "2026-11-11T05:21:40.685893+00:00",
   "scope": "Default opaque provider entrypoint; non-root UID 10001, read-only root, zero effective capabilities, no-new-privileges. Individual CVE conditions are checked against this exact reviewed source and dependency set. Not general-purpose OS CLI use.",
   "python_version": "3.13.7",
   "application_sources_sha256": {
     "src/aelev_deep_screening_provider/__init__.py": "aecc1815495051fb9cd640d10ec35182ac802034b91e9c05731039b9b0b048c7",
-    "src/aelev_deep_screening_provider/__main__.py": "2356126e7ad200d1194a6c680c29030bf1841a12917de0bbb40014bd72dcfac3",
+    "src/aelev_deep_screening_provider/__main__.py": "17ab63547deb02d974187f69cffb7253264de815ac511f16b34b8cdb91d7d21a",
     "src/aelev_deep_screening_provider/app.py": "a2e43473de63bee71081a6f97e4fcb7e4f0c9f66dbc2b02dddeafa42bc65c25a",
     "src/aelev_deep_screening_provider/contract.py": "dafceb2623b487c0a526fdd1e42d26557e5c41810ca33cffc6c3ec3a20a00b2a",
     "src/aelev_deep_screening_provider/engine.py": "d66a859964bfc8ebe71d3e99768acf3c33fc5faa1a0d7e40950e608a83a50e75",
-    "src/aelev_deep_screening_provider/health.py": "45d9a50183553b908d8a78d6d851b731e313b22834ae1e2a68d773fdac29e328",
-    "src/aelev_deep_screening_provider/media.py": "3e8ebb9ed73a3a9974a7a40f8e4339ba79e1d3c3e765e84f32628378d2ac71fa"
+    "src/aelev_deep_screening_provider/health.py": "98d1b26f17c0d9fe66007850cae08e922b7f7151e440f434172902a3f8a53f90",
+    "src/aelev_deep_screening_provider/media.py": "3e8ebb9ed73a3a9974a7a40f8e4339ba79e1d3c3e765e84f32628378d2ac71fa",
+    "src/aelev_deep_screening_provider/tls_identity.py": "19d4fd5bb1a00446bbbeb744edb212de1f69990f5a0ec37248e22d32858c87cf",
+    "src/aelev_deep_screening_provider/tls_server.py": "2c3d17163a0aba9df08e8261911a29a6271cc442e7dcf4b1f695f97199b802d5"
   },
   "dependency_lock_sha256": "5f69f6ec0ae7ca9daa3514d76b70efc1e6891d68ce3c31370b9993a0e3bce22b",
   "provider_lock_sha256": "9f516fc3a16fd33e9a03c518ada6ea5a493f8f191011c6f8dd2365079b789f36",
@@ -36,5 +38,12 @@
   "gate_sources_sha256": {
     "tools/provider_security.py": "9b37357e205e933fc16485aa8e296b5915b0f562af09ad411a5811b0bde308dc",
     "tools/runtime_surface_probe.py": "8ef07fc418786ba3b51efe387a4f275fe10a7eb1bacf20279400f0ca0b3e4282"
+  },
+  "transport_review": {
+    "decision": "EXACT_PEER_AND_IDENTITY_LIFECYCLE_REVIEWED",
+    "record": "docs/adr/0001-tls-identity-lifecycle.md",
+    "new_dependencies": false,
+    "inference_and_media_sources_unchanged": true,
+    "scope": "Default mTLS entrypoint. OpenSSL chain/purpose validation and exact peer authorization; buffered unauthorized data never dispatches to ASGI. File delivery is fresh and digest-bound; certificate/CA generations replace contexts without a stale fallback. Readiness expires after five seconds. In-memory inspection never opens a socket or executes a process. Existing CVE-specific utility/native-path exclusions and UID/read-only/capability controls remain mandatory."
   }
 }

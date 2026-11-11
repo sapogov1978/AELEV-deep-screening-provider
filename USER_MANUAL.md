@@ -12,10 +12,38 @@ Screening or Translation providers.
 
 ## Runtime
 
-The image listens on port `18486`. By default it requires server files
-`server.crt`, `server.key` and `client-ca.crt` under
-`/run/secrets/model-module`. `AELEV_PROVIDER_INSECURE_HTTP=1` is accepted
-only for an explicit local test outside production.
+The image listens on port `18486`. Its read-only TLS root is
+`/run/secrets/model-module`. Supply `identity.json` with exactly:
+
+```json
+{
+  "schema_version": 1,
+  "environment": "production",
+  "delivery": "spire-file-v1",
+  "server_spiffe_id": "spiffe://identity.example/deep-screening/compute/installation",
+  "client_spiffe_id": "spiffe://identity.example/deep-screening/control/installation"
+}
+```
+
+Replace both exact identities with approved owner values. Mount only the
+public file-delivery result of the corresponding SPIRE agent at the TLS root,
+and the owner policy read-only as `identity.json` within that root. The agent
+provides `current.json`, `generations/<generation>/tls.pem` (mode 0600) and
+`bundle.pem`; no bootstrap, agent state or issuer key is mounted. Stale,
+withdrawn, changed or unavailable delivery blocks new requests without reuse
+of the previous generation.
+
+An explicitly local/test policy may select `pem-files-v1` with `server.crt`,
+`server.key` (mode 0600) and `client-ca.crt`; this layout assumes the same
+approved authority for server and client. It is forbidden for production.
+`AELEV_PROVIDER_INSECURE_HTTP=1` remains only an explicit local test override,
+forbidden by the production image/admission profile.
+
+Leaf/CA generations reload without restarting the provider. Changing policy
+or expected identities requires a controlled deployment and renewed owner
+admission. The healthcheck requires a live readiness observer, initialized
+inference and current identity. See the complete
+[identity lifecycle contract](docs/adr/0001-tls-identity-lifecycle.md).
 
 `python -m aelev_deep_screening_provider verify-config` validates the lock,
 prompt and release descriptor without reading a key or using the network.

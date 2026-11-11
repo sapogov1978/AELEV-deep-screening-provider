@@ -4,14 +4,14 @@ from __future__ import annotations
 
 import argparse
 import os
-import ssl
 from pathlib import Path
 
 import uvicorn
 
 from .app import create_app
 from .engine import Engine, Settings, read_profile, release_digest
-from .health import clear_readiness, healthy, record_readiness
+from .health import clear_readiness, healthy, monitor_readiness
+from .tls_server import serve
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -60,20 +60,11 @@ def main() -> None:
     )
     try:
         app = create_app(engine, digest, blocker)
-        record_readiness(engine is not None)
         if os.environ.get("AELEV_PROVIDER_INSECURE_HTTP") == "1":
-            uvicorn.run(app, host="0.0.0.0", port=18486, access_log=False)
+            with monitor_readiness(lambda: engine is not None):
+                uvicorn.run(app, host="0.0.0.0", port=18486, access_log=False)
         else:
-            uvicorn.run(
-                app,
-                host="0.0.0.0",
-                port=18486,
-                access_log=False,
-                ssl_certfile=str(tls_root / "server.crt"),
-                ssl_keyfile=str(tls_root / "server.key"),
-                ssl_ca_certs=str(tls_root / "client-ca.crt"),
-                ssl_cert_reqs=ssl.CERT_REQUIRED,
-            )
+            serve(app, tls_root, "deep-screening", 18486, engine is not None)
     finally:
         clear_readiness()
         if engine is not None:

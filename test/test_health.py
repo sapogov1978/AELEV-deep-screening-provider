@@ -65,6 +65,21 @@ def test_missing_or_invalid_readiness_is_not_healthy() -> None:
     assert not health.healthy()
 
 
+@pytest.mark.parametrize("offset", [-1.0, 6.0, float("inf"), float("nan")])
+def test_stopped_or_invalid_readiness_observer_cannot_leave_a_healthy_marker(
+    monkeypatch: pytest.MonkeyPatch, offset: float
+) -> None:
+    health.record_readiness(True)
+    observed = json.loads(health.HEALTH_FILE.read_text())["observed_at"]
+    monkeypatch.setattr(health.time, "monotonic", lambda: observed + offset)
+
+    def forbidden_connect(*_: object, **__: object) -> socket.socket:
+        raise AssertionError("stale readiness must fail before probing TCP")
+
+    monkeypatch.setattr(health.socket, "create_connection", forbidden_connect)
+    assert not health.healthy()
+
+
 @pytest.mark.parametrize("ready", [True, False])
 def test_health_cli_does_not_initialize_inference(
     monkeypatch: pytest.MonkeyPatch, ready: bool

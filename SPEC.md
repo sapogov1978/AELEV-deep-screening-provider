@@ -15,6 +15,14 @@ SHA-256 digest of [release.json](release.json). Requests and responses use the
 envelope in [contracts/opaque-compute-v1.json](contracts/opaque-compute-v1.json).
 No provider, model, prompt, upstream body or credential is disclosed.
 
+The port additionally requires exact SPIFFE peer authorization and renewable
+TLS material under [ADR-0001](docs/adr/0001-tls-identity-lifecycle.md). A trusted
+CA alone is insufficient. An unauthorized connection cannot dispatch buffered
+HTTP bytes. Production consumes fresh `spire-file-v1` output, replaces leaf
+and CA contexts for new handshakes and blocks stale, changed or withdrawn
+material. Subsequent requests on existing sessions also require current
+owned identity and an unexpired exact client identity.
+
 Inference output contains `decision` (`SUITABLE`, `UNSUITABLE` or `REVIEW`),
 bounded candidate groups, exact evidence URLs/digests and `unknown_scope`.
 Deep Screening revalidates every location against its own collected evidence
@@ -88,7 +96,8 @@ Local readiness validates immutable configuration and a non-placeholder secret
 without performing a billable upstream probe. Docker healthcheck requires the
 serving process's initialized inference state, a live process and the bound
 local port; a listening port with blocked configuration is unhealthy. Its
-readiness marker is cleared at startup and shutdown, and the health CLI never
+readiness requires current TLS identity and a producer marker no older than
+five seconds. The marker is cleared at startup and shutdown, and the health CLI never
 initializes inference or reads a key. Provider quota, model access and
 semantic quality require a bounded live evaluation. Production use additionally
 requires an immutable signed image digest, SBOM, provenance, mTLS identities and

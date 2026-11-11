@@ -1,0 +1,103 @@
+"""Reloadable mTLS and exact-peer admission before the opaque ASGI app."""
+
+from __future__ import annotations
+
+import asyncio
+import ssl
+from pathlib import Path
+from typing import Any, cast
+
+import uvicorn
+from uvicorn.protocols.http.h11_impl import H11Protocol
+
+from .health import monitor_readiness
+from .tls_identity import Identity, leaf_certificate, peer_matches
+
+
+class IdentityConfig(uvicorn.Config):
+    @property
+    def is_ssl(self) -> bool:
+        return bool(getattr(self, "ssl", None)) or super().is_ssl
+
+
+def configured_server(
+    app: Any, identity: Identity, host: str, port: int
+) -> uvicorn.Server:
+    class ExactPeerProtocol(H11Protocol):
+        def connection_made(self, transport: asyncio.Transport) -> None:
+            self.allowed_peer = False
+            super().connection_made(transport)
+            peer = transport.get_extra_info("peercert")
+            if not isinstance(peer, dict):
+                transport.close()
+                return
+            certificate = cast(dict[str, Any], peer)
+            session = transport.get_extra_info("ssl_object")
+            if not isinstance(session, ssl.SSLObject):
+                transport.close()
+                return
+            raw = session.getpeercert(binary_form=True)
+            if (
+                not isinstance(raw, bytes)
+                or not leaf_certificate(ssl.DER_cert_to_PEM_cert(raw).encode("ascii"))
+                or not peer_matches(certificate, identity.peer_id)
+            ):
+                transport.close()
+                return
+            self.allowed_peer = True
+            original = self.app
+
+            async def guarded(scope: Any, receive: Any, send: Any) -> None:
+                if not identity.available() or not peer_matches(
+                    certificate, identity.peer_id
+                ):
+                    await send(
+                        {
+                            "type": "http.response.start",
+                            "status": 503,
+                            "headers": [(b"content-type", b"application/json")],
+                        }
+                    )
+                    await send(
+                        {
+                            "type": "http.response.body",
+                            "body": b'{"detail":"PROVIDER_TLS_IDENTITY_UNAVAILABLE"}',
+                        }
+                    )
+                    return
+                await original(scope, receive, send)
+
+            self.app = guarded
+
+        def data_received(self, data: bytes) -> None:
+            if not self.allowed_peer:
+                self.transport.close()
+                return
+            super().data_received(data)
+
+    config = IdentityConfig(
+        app,
+        host=host,
+        port=port,
+        http=ExactPeerProtocol,
+        ws="none",
+        access_log=False,
+        proxy_headers=False,
+        log_level="warning",
+    )
+    config.load()
+    config.ssl = identity.wire_context()
+    return uvicorn.Server(config)
+
+
+def serve(
+    app: Any,
+    root: Path,
+    owner: str,
+    port: int,
+    engine_ready: bool,
+) -> None:
+    identity = Identity(root, owner)
+    server = configured_server(app, identity, "0.0.0.0", port)
+    with monitor_readiness(lambda: engine_ready and identity.available()):
+        server.run()
