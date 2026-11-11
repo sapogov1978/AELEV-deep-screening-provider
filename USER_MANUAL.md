@@ -60,6 +60,9 @@ unknown or blocked scope; do not relabel a text-only projection as image/PDF
 understanding. Release v0.2.2 has a separately reviewed seven-case
 [real-material evaluation](docs/audit/provider-release-v0.2.2-20261111.md)
 and a verified restricted security profile for both native architectures.
+Release v0.2.3 adds exact peer authorization and renewable TLS; its two-case
+[transport regression](docs/audit/provider-release-v0.2.3-20261111.md) links
+the unchanged inference/locks to that seven-case baseline.
 It does not close deployed owner-collection or policy-scope admission.
 
 A healthy process proves only local configuration. Before selecting the release

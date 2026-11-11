@@ -1,0 +1,166 @@
+{
+  "schema_version": 3,
+  "status": "COMPONENT_RELEASE_VERIFIED",
+  "recorded_at": "2026-11-11T06:13:46.297842+00:00",
+  "release_tag": "v0.2.3",
+  "owner": "deep-screening",
+  "image": "ghcr.io/sapogov1978/aelev-deep-screening-provider@sha256:7f831b76c10938a2001ad26d7f43b51785e31a330c378aa8d77866c04677d10c",
+  "artifact_source_commit": "a3f07764a05bec63e02dc4253c5c9734e9ba4935",
+  "live_architecture": "linux/arm64",
+  "case_count": 2,
+  "automated_checks": "PASS",
+  "semantic_reviewer": "Codex",
+  "quality_scope": "Selected retained real-material transport regression through the exact released image. These are frozen component replays, not a fresh working-queue or current-policy E2E. Prior complete component quality coverage remains linked through byte-identical inference, prompt and dependency sources.",
+  "cases": [
+    {
+      "id": "real-collected-queue-site-surface",
+      "expected": "SUITABLE",
+      "observed": "SUITABLE",
+      "http_status": 200,
+      "request_sha256": "43c33d18312d2c7f17d799c1790771f993fc49931520ca329ea57fb5d4614693",
+      "response_sha256": "c444efac0229006c6882bdd73e3f33225e752b6e0eb1f18787b22da6b7c03fd4",
+      "elapsed_seconds": 8.955,
+      "semantic_review": "PASS: Both access points, evidence URLs and digests occur in the supplied extracts. Unfetched articles, archives, cadence and machine-readable endpoints remain unknown."
+    },
+    {
+      "id": "real-media-data-csv",
+      "expected": "SUITABLE",
+      "observed": "SUITABLE",
+      "http_status": 200,
+      "request_sha256": "33d8f58e5ea3313ada689c3a65181fc5abc52d31205c622c74d752efea699218",
+      "response_sha256": "ea889fcedf3c3c97af8ee944706aa6b13b38370b5dc77c24d102514957449a92",
+      "elapsed_seconds": 9.375,
+      "semantic_review": "PASS: The decoded digest-bound CSV has 111 data rows, period/CIE_spf/CIE_mich headers and the stated first/last dates. Units, methodology and update cadence remain unknown."
+    }
+  ],
+  "baseline": {
+    "release_tag": "v0.2.2",
+    "report": "provider-release-v0.2.2-20261111.json",
+    "source_comparison": {
+      "source": "a3f07764a05bec63e02dc4253c5c9734e9ba4935",
+      "compared_release": "v0.2.2",
+      "status": "BYTE_IDENTICAL",
+      "sources": {
+        "poetry.lock": "5f69f6ec0ae7ca9daa3514d76b70efc1e6891d68ce3c31370b9993a0e3bce22b",
+        "provider.lock.json": "9f516fc3a16fd33e9a03c518ada6ea5a493f8f191011c6f8dd2365079b789f36",
+        "release.json": "f979b5590a85d75741c2382b4be299ab9cdcd6c0cf3c578394b1046fdc8437b7",
+        "prompts/sensor-surface-v1.txt": "6d69e666081fc83e24e192ddf11f1083027075771e8df38d80ae548d23737d84",
+        "prompts/sensor-surface-v2.txt": "7ddc42e7dde5dcdef5ffab9f14fc340b53028fab195b0a50b6c008f401b9cf02",
+        "src/aelev_deep_screening_provider/media.py": "3e8ebb9ed73a3a9974a7a40f8e4339ba79e1d3c3e765e84f32628378d2ac71fa",
+        "src/aelev_deep_screening_provider/__init__.py": "aecc1815495051fb9cd640d10ec35182ac802034b91e9c05731039b9b0b048c7",
+        "src/aelev_deep_screening_provider/engine.py": "d66a859964bfc8ebe71d3e99768acf3c33fc5faa1a0d7e40950e608a83a50e75",
+        "src/aelev_deep_screening_provider/app.py": "a2e43473de63bee71081a6f97e4fcb7e4f0c9f66dbc2b02dddeafa42bc65c25a",
+        "src/aelev_deep_screening_provider/contract.py": "dafceb2623b487c0a526fdd1e42d26557e5c41810ca33cffc6c3ec3a20a00b2a"
+      }
+    },
+    "evidence_sha256": "013b8d815b358e72228d852ac3c62176a78cd7cc45f0ad17ee2815625d7cb56f"
+  },
+  "tls": {
+    "decision": "EXACT_PEER_AND_IDENTITY_LIFECYCLE_VERIFIED_IN_COMPONENT_SCOPE",
+    "decision_record": "../adr/0001-tls-identity-lifecycle.md",
+    "actual_released_image": {
+      "anonymous_rejected": true,
+      "same_ca_foreign_identity_rejected": true,
+      "expected_server_uri_checked_before_post": true,
+      "identities": "ephemeral test PEM; not deployed native SPIRE"
+    },
+    "linux_source_tests": {
+      "tests": 71,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1
+    },
+    "separate_placeholder_image_health_tests_passed": 1,
+    "image_source_files_verified": 19,
+    "native_issuer_renewal_proved": false
+  },
+  "security": {
+    "status": "SCOPED_SECURITY_PASS",
+    "architectures": {
+      "linux/amd64": {
+        "status": "SCOPED_SECURITY_PASS",
+        "raw_severity_counts": {
+          "CRITICAL": 1,
+          "HIGH": 35,
+          "LOW": 88,
+          "MEDIUM": 96,
+          "UNKNOWN": 10
+        },
+        "unresolved_high_critical_package_findings": 0,
+        "reviewed_profile_sha256": "0f4c12e0fbec50060996a5b055e494ad52a436d9fbf10e1b878d723c45edd217"
+      },
+      "linux/arm64": {
+        "status": "SCOPED_SECURITY_PASS",
+        "raw_severity_counts": {
+          "CRITICAL": 1,
+          "HIGH": 35,
+          "LOW": 88,
+          "MEDIUM": 96,
+          "UNKNOWN": 10
+        },
+        "unresolved_high_critical_package_findings": 0,
+        "reviewed_profile_sha256": "0f4c12e0fbec50060996a5b055e494ad52a436d9fbf10e1b878d723c45edd217"
+      }
+    },
+    "scope": "Reviewed default opaque Python entrypoint only: UID 10001, read-only root, zero effective capabilities, no-new-privileges. Raw CVEs remain recorded; distribution packages are not claimed patched.",
+    "future_unreviewed_high_critical": "BLOCK"
+  },
+  "supply_chain": {
+    "image": "ghcr.io/sapogov1978/aelev-deep-screening-provider@sha256:7f831b76c10938a2001ad26d7f43b51785e31a330c378aa8d77866c04677d10c",
+    "source": "a3f07764a05bec63e02dc4253c5c9734e9ba4935",
+    "signature_identity": "https://github.com/sapogov1978/AELEV-deep-screening-provider/.github/workflows/release.yml@refs/tags/v0.2.3",
+    "platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "status": "SUPPLY_CHAIN_PASS",
+    "source_audit_run": 42966540584,
+    "release_run": 42968878563
+  },
+  "evidence_sha256": {
+    "release-digest.txt": "8e621f831bf9958ba9e5d1989ed71e4609125fc50d72cbd4b8082f9b67544e1f",
+    "signature.json": "2e57e1823f40dae4df7f9dc9d2d31254ab90c2e243010e350909846e3077bea1",
+    "manifest.json": "7f831b76c10938a2001ad26d7f43b51785e31a330c378aa8d77866c04677d10c",
+    "provenance.json": "c7c2df22ef57774760cffa2f8dfad8791bfc0525cf67f5458a20923d14e6b8f3",
+    "sbom.json": "6e226db0e2246ca0c09533fcc1b05edccbc5e42f0d1bce30b996bfa651d88ac2",
+    "supply-chain-verification.json": "13fb74d797b436b9b8e62ecd9c8c5e4bba2ec444685c016c6c7af19d2a8f0f4c",
+    "security-amd64.json": "c6a375f0ea96ec3e9a0f24f0232d2c9bc47c95e2072a432ed888aed0799c4637",
+    "security-arm64.json": "c5f3a0f0dc901545b5f2e55011fe2e20824e11a429e93dc07e79a7ee2fa8d909",
+    "vulnerabilities-amd64.json": "54605288c0f818a7d05970e1aef915c51d839da8058d54d9f7a25f2b59f61523",
+    "vulnerabilities-arm64.json": "7b3084a09b7260743c17d4bdf6134155c9060fa5a25722a18ae208118cb1be3a",
+    "deep-screening-quality.json": "02f67c41b361f386dd825a79b459e5082280ac3526727af38039c811740691f9"
+  },
+  "local_transport_evidence_sha256": {
+    "linux-tests.json": "08bdf4e8bee81ff54a0bd0a4c7fb6d95e31257b66649436b4cb72f55ae32c860",
+    "linux-tests.xml": "ce924357f38a87ae0c125662719d4b814820dc08f6bf93836cb2254d7c7071ca",
+    "image-health.xml": "b5e3c7de4b9f8406e24f23e09867f6ab19f58d06733c89caa7500c9af2b21933",
+    "inference-and-locks-preserved.json": "3f919e87aade9e11dbb40e71a7e984c336fac912b39c072fab2f4bdf3abcc538"
+  },
+  "raw_evidence_path": "/private/var/tmp/aelev-production-admission.wDuzQd/deep-v023/deep-screening-quality.json",
+  "request_response_hash_encoding": "Canonical JSON, sorted keys, compact separators, UTF-8; content hashes, not HTTP wire hashes.",
+  "cleanup": {
+    "preserved": true,
+    "scope": "Only the labelled proof containers and their private volumes were removed.",
+    "reconciliation": {
+      "runner_exit_code": 1,
+      "reason": "Docker stop returned before asynchronous --rm container deletion. No inference was repeated.",
+      "original_report_sha256": "3828451596a09965d3136094ddcff27d59f1ba84285932e57bed7a990897bdbc",
+      "original_report_preserved": true,
+      "removed_volumes": [
+        "aelev-provider-tls-live-deep-78dd2d6f6707-credential",
+        "aelev-provider-tls-live-deep-78dd2d6f6707-tls"
+      ],
+      "container_absent": true
+    },
+    "working_runtime_preservation_sha256": "97d50e39cd4d570753557e2d1312341bf2ca7009acc01fa1e2921e7300aab0a3"
+  },
+  "queue_resume_issued": false,
+  "working_runtime_switched": false,
+  "remaining_gates": [
+    "DEPLOYED_NATIVE_ISSUER_AND_RENEWAL_PROOF",
+    "PERMANENT_OWNER_IDENTITIES_AND_EGRESS",
+    "FUNCTIONAL_OWNER_CURRENT_POLICY_OR_INSTRUCTION_SCOPE_ADMISSION",
+    "OWNER_COLLECTION_AND_WORKER_E2E",
+    "FULL_PLATFORM_RELEASE_AND_CLEAN_CHECKOUT_DEPLOYMENT"
+  ]
+}

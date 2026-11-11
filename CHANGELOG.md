@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Verified signed v0.2.3: both native security profiles, Linux TLS tests and
+  two selected real-material live requests. Retained the staging/cleanup
+  discrepancies and reconciled cleanup without repeating successful inference.
 - Require exact client/server SPIFFE identities and fresh SPIRE delivery for
   production mTLS. Reload leaf and CA generations for new connections, block
   stale or withdrawn material and retain the existing model/dependency locks.

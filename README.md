@@ -6,11 +6,15 @@ material over mutually authenticated HTTPS and calls the OpenAI Responses API.
 Model ID, prompt and credential remain provider-owned and never cross the
 opaque port.
 
-Current source adds exact client SPIFFE authorization and renewable TLS
+Release [v0.2.3](docs/audit/provider-release-v0.2.3-20261111.md) adds exact client SPIFFE authorization and renewable TLS
 generations under [ADR-0001](docs/adr/0001-tls-identity-lifecycle.md). Local
 real-TLS tests cover wrong identities, buffered unauthorized requests,
 renewal, replacement CA and withdrawal; they do not call OpenAI or grant
 deployment admission. Model, prompt and dependency locks are unchanged.
+
+The exact signed image also passed two selected live regression requests
+with retained real material, and rejected anonymous and same-CA foreign peers.
+This bounded transport evidence is separate from current-policy owner admission.
 
 The v0.2.2 release accepts bounded owner-supplied PDF, spreadsheet and image
 bytes through that port. It verifies their SHA-256, binds them to the supplied
