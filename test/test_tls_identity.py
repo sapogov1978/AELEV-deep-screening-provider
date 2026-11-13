@@ -2,15 +2,19 @@
 
 from __future__ import annotations
 
+import gc
 import http.client
 import json
 import socket
 import ssl
+import subprocess
 import threading
 import time
+import weakref
 from collections.abc import Iterator
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
+from typing import cast
 
 import pytest
 from fastapi import FastAPI
@@ -238,6 +242,35 @@ def test_client_identity_is_verified_for_its_actual_tls_role(
     assert context.verify_mode == ssl.CERT_REQUIRED and context.check_hostname
 
 
+def test_existing_connection_cannot_outlive_replacement_of_its_ca(
+    tmp_path: Path, authority: Authority, running: tuple[Path, int, list[str]]
+) -> None:
+    root, port, calls = running
+    context = ssl.create_default_context(cafile=authority.cert)
+    context.load_cert_chain(*authority.leaf([CLIENT]))
+    connection = http.client.HTTPSConnection(
+        "localhost", port, context=context, timeout=3
+    )
+    try:
+        connection.request("GET", "/v1/status")
+        first = connection.getresponse()
+        first.read()
+        assert first.status == 200
+        replacement = Authority(tmp_path / "replacement-authority")
+        delivered(root, replacement, *replacement.leaf([SERVER]))
+        connection.request("POST", "/v1/infer", body=b"{}")
+        blocked = connection.getresponse()
+        assert blocked.status == 503
+        assert json.loads(blocked.read()) == {
+            "detail": "PROVIDER_TLS_IDENTITY_UNAVAILABLE"
+        }
+        assert calls == ["status"]
+        assert request(port, replacement, *replacement.leaf([CLIENT])) == 200
+        assert calls == ["status", "status"]
+    finally:
+        connection.close()
+
+
 def test_real_tls_renews_leaf_and_replaces_ca_without_listener_restart(
     tmp_path: Path, authority: Authority, running: tuple[Path, int, list[str]]
 ) -> None:
@@ -266,3 +299,85 @@ def test_fresh_context_cannot_use_last_good_generation_after_withdrawal(
     with pytest.raises((OSError, http.client.HTTPException)):
         request(port, authority, *client)
     assert calls == ["status"]
+
+
+def test_callback_context_survives_hrr_gc_and_identity_renewal(
+    request: pytest.FixtureRequest,
+    monkeypatch: pytest.MonkeyPatch,
+    authority: Authority,
+) -> None:
+    """Exercise the second ClientHello of CVE-2026-19445 on Python 3.13.7."""
+    original_factory = Identity.wire_context
+    callbacks: list[str | None] = []
+    references: list[weakref.ReferenceType[ssl.SSLContext]] = []
+
+    def selecting(self: Identity) -> ssl.SSLContext:
+        initial = original_factory(self)
+        initial.set_ecdh_curve("prime256v1")
+        original = initial.sni_callback
+        assert original is not None
+        references.append(weakref.ref(initial))
+
+        def collect_and_select(
+            channel: ssl.SSLObject,
+            hostname: str,
+            context: ssl.SSLContext,
+        ) -> int | None:
+            gc.collect()
+            callbacks.append(hostname)
+            # X25519 is the client's first share; requiring P-256 provokes
+            # a real TLS 1.3 HelloRetryRequest and another ClientHello.
+            self.current().set_ecdh_curve("prime256v1")
+            result = original(channel, hostname, context)
+            gc.collect()
+            return result
+
+        initial.sni_callback = collect_and_select
+        return initial
+
+    monkeypatch.setattr(Identity, "wire_context", selecting)
+    root, port, calls = cast(
+        tuple[Path, int, list[str]], request.getfixturevalue("running")
+    )
+    cert, key = authority.leaf([CLIENT])
+    for attempt in range(2):
+        if attempt:
+            delivered(root, authority, *authority.leaf([SERVER]))
+        result = subprocess.run(
+            [
+                "openssl",
+                "s_client",
+                "-connect",
+                f"localhost:{port}",
+                "-servername",
+                "localhost",
+                "-CAfile",
+                str(authority.cert),
+                "-cert",
+                str(cert),
+                "-key",
+                str(key),
+                "-groups",
+                "X25519:P-256",
+                "-tls1_3",
+                "-quiet",
+                "-msg",
+            ],
+            input=(
+                "GET /v1/status HTTP/1.1\r\nHost: localhost\r\n"
+                "Connection: close\r\n\r\n"
+            ),
+            text=True,
+            capture_output=True,
+            check=True,
+            timeout=10,
+        )
+        assert "200 OK" in result.stdout and '{"state":"READY"}' in result.stdout
+        gc.collect()
+        assert (
+            "cf21ad74e59a6111be1d8c021e65b891c2a211167abb8c5e079e09e2c8a8339c"
+            in "".join(result.stdout.lower().split())
+        )
+        assert len(callbacks) >= attempt + 1
+        assert references[0]() is not None
+    assert calls == ["status", "status"]

@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+- Candidate 0.2.4 binds every HTTP dispatch to the actual current handshake
+  context. Replacing CA/SVID blocks old keep-alive sessions before inference,
+  with fresh connections accepted without a listener restart. Regression tests
+  reproduce the old failure and cover TLS 1.3 HRR/GC/renewal.
+- Refresh exact source/gate security bindings and require compromised CA roots
+  absent from system and certifi bundles; retain raw findings and existing
+  CVE-specific conditions. Model, prompt, opaque descriptor and locks are unchanged.
+- Initialize the private TLS mount as UID/GID 10001, mode 0700, and verify the
+  first empty volume can prepare its own material without root or capabilities.
+  New signed-image, semantic-quality and owner-deployment admission remain open.
+
 - Verified signed v0.2.3: both native security profiles, Linux TLS tests and
   two selected real-material live requests. Retained the staging/cleanup
   discrepancies and reconciled cleanup without repeating successful inference.

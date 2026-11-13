@@ -31,7 +31,8 @@ LABEL org.opencontainers.image.source="https://github.com/sapogov1978/AELEV-deep
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PYTHONPATH=/opt/aelev/src VIRTUAL_ENV=/opt/aelev/.venv PATH=/opt/aelev/.venv/bin:$PATH HOME=/tmp XDG_CACHE_HOME=/tmp OPENAI_API_KEY_FILE=/run/secrets/provider/credential.env
 RUN apt-get purge --yes libsqlite3-0 \
     && groupadd --system --gid 10001 aelev \
-    && useradd --system --uid 10001 --gid aelev --home-dir /nonexistent aelev
+    && useradd --system --uid 10001 --gid aelev --home-dir /nonexistent aelev \
+    && install -d --owner=10001 --group=10001 --mode=0700 /run/secrets/model-module
 WORKDIR /opt/aelev
 COPY --from=dependencies /opt/aelev/.venv ./.venv
 RUN /usr/local/bin/python -m pip uninstall --yes pip setuptools \

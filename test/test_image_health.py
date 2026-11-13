@@ -84,3 +84,48 @@ def test_placeholder_image_is_unhealthy_even_when_the_http_port_is_open() -> Non
         }
     finally:
         command("docker", "stop", "--time", "3", container)
+
+
+@pytest.mark.skipif(not IMAGE, reason="requires an explicitly built runtime image")
+def test_first_empty_tls_mount_is_owned_by_the_nonroot_runtime() -> None:
+    tls_root = "/run/secrets/model-module"
+    volume = "aelev-provider-first-mount-" + uuid4().hex[:10]
+    command(
+        "docker",
+        "volume",
+        "create",
+        "--label",
+        "io.aelev.acceptance=provider-first-mount",
+        volume,
+    )
+    try:
+        probe = (
+            "import os,pathlib,stat; "
+            "p=pathlib.Path('" + tls_root + "'); "
+            "s=p.stat(); "
+            "assert os.getuid()==10001 and os.getgid()==10001; "
+            "assert s.st_uid==10001 and s.st_gid==10001; "
+            "assert stat.S_IMODE(s.st_mode)==0o700; "
+            "(p/'own-key-preparation-probe').write_text('ephemeral test')"
+        )
+        command(
+            "docker",
+            "run",
+            "--rm",
+            "--network",
+            "none",
+            "--read-only",
+            "--cap-drop",
+            "ALL",
+            "--security-opt",
+            "no-new-privileges",
+            "--mount",
+            "type=volume,source=" + volume + ",target=" + tls_root,
+            "--entrypoint",
+            "python",
+            IMAGE,
+            "-c",
+            probe,
+        )
+    finally:
+        command("docker", "volume", "rm", volume)

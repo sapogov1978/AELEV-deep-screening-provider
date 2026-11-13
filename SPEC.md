@@ -21,7 +21,11 @@ CA alone is insufficient. An unauthorized connection cannot dispatch buffered
 HTTP bytes. Production consumes fresh `spire-file-v1` output, replaces leaf
 and CA contexts for new handshakes and blocks stale, changed or withdrawn
 material. Subsequent requests on existing sessions also require current
-owned identity and an unexpired exact client identity.
+owned identity and an unexpired exact client identity. Under
+[ADR-0002](docs/adr/0002-session-trust-lifecycle.md), every dispatch also requires
+the exact current SSLContext used by that connection's completed handshake.
+CA/SVID replacement therefore blocks an old keep-alive request with 503 and
+Connection: close before inference; in-flight inference retains its deadline.
 
 Inference output contains `decision` (`SUITABLE`, `UNSUITABLE` or `REVIEW`),
 bounded candidate groups, exact evidence URLs/digests and `unknown_scope`.
@@ -73,7 +77,8 @@ Those account-level properties remain admission gates.
 ## Readiness and release
 
 Security admission uses the [reviewed runtime profile](security/runtime-profile.json)
-and [CVE-specific evidence](docs/audit/runtime-security-20261111.md). It is scoped
+and [current TLS review](docs/audit/runtime-security-20261113.md), retaining
+the earlier [CVE-specific evidence](docs/audit/runtime-security-20261111.md). It is scoped
 to the default opaque entrypoint under non-root, read-only, no-capabilities and
 no-new-privileges conditions. The owner verifies those conditions at deployment.
 Any changed reviewed source/dependency or unreviewed HIGH/CRITICAL blocks the

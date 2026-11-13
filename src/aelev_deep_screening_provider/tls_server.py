@@ -11,7 +11,7 @@ import uvicorn
 from uvicorn.protocols.http.h11_impl import H11Protocol
 
 from .health import monitor_readiness
-from .tls_identity import Identity, leaf_certificate, peer_matches
+from .tls_identity import Identity, IdentityError, leaf_certificate, peer_matches
 
 
 class IdentityConfig(uvicorn.Config):
@@ -46,16 +46,22 @@ def configured_server(
                 return
             self.allowed_peer = True
             original = self.app
+            admitted_context = session.context
 
             async def guarded(scope: Any, receive: Any, send: Any) -> None:
-                if not identity.available() or not peer_matches(
-                    certificate, identity.peer_id
-                ):
+                try:
+                    current_trust = identity.current() is admitted_context
+                except IdentityError:
+                    current_trust = False
+                if not current_trust or not peer_matches(certificate, identity.peer_id):
                     await send(
                         {
                             "type": "http.response.start",
                             "status": 503,
-                            "headers": [(b"content-type", b"application/json")],
+                            "headers": [
+                                (b"content-type", b"application/json"),
+                                (b"connection", b"close"),
+                            ],
                         }
                     )
                     await send(

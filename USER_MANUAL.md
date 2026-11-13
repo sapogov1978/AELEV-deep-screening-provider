@@ -39,7 +39,12 @@ approved authority for server and client. It is forbidden for production.
 `AELEV_PROVIDER_INSECURE_HTTP=1` remains only an explicit local test override,
 forbidden by the production image/admission profile.
 
-Leaf/CA generations reload without restarting the provider. Changing policy
+Leaf/CA generations reload without restarting the provider. A connection
+established with replaced material cannot dispatch another request; the worker
+must establish a fresh authenticated connection. This does not cancel an
+inference that was dispatched before the change. The image initializes its
+empty private TLS mount as UID/GID 10001, mode 0700; no root initializer or
+shared worker volume is required. Changing policy
 or expected identities requires a controlled deployment and renewed owner
 admission. The healthcheck requires a live readiness observer, initialized
 inference and current identity. See the complete
