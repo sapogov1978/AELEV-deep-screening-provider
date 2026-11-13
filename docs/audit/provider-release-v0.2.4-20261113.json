@@ -1,0 +1,156 @@
+{
+  "schema_version": 4,
+  "status": "COMPONENT_RELEASE_VERIFIED",
+  "recorded_at": "2026-11-13T14:23:18.624642+00:00",
+  "release_tag": "v0.2.4",
+  "owner": "deep-screening",
+  "image": "ghcr.io/sapogov1978/aelev-deep-screening-provider@sha256:f9f732515f66855d4b3744b682276e1d99ff3f2f9fa1d327e0353109a22ab213",
+  "artifact_source_commit": "af4968b7cca397261a98d1b2c5d22cff6e3b1260",
+  "native_platform": "linux/arm64",
+  "case_count": 1,
+  "quality_scope": "One selected actual real-material regression through the exact released mTLS image. Fresh public bytes collected/projected by evaluator using owner code. This is not deployed Gateway/owner collection, current-active-policy queue processing, cascade E2E or physical-host acceptance.",
+  "case": {
+    "id": "actual-public-bytes-owner-instruction-and-projection",
+    "http_status": 200,
+    "observed": "SUITABLE",
+    "elapsed_seconds": 15.496,
+    "request_sha256": "b4cde8b139897b490c703d891215a2182361d542896d4a276982904324d53274",
+    "response_sha256": "07a69af1bbdd3ce65fc9abfc01249c15d836abd5b253d52ad7a18bcca18b12a3",
+    "semantic_review": "PASS: One source candidate and seven access points reuse supplied URLs and exact source-byte digests. The actual owner verifier accepts every seed/link/evidence binding. Unknown scope explicitly excludes uninspected destinations, feed payloads, downloads, cadence and other content. The existing 160-character candidate-description cap leaves a trailing partial clause; the meaningful identification and evidence/coverage fields remain intact."
+  },
+  "baseline": {
+    "report": "provider-release-v0.2.3-20261111.json",
+    "comparison": {
+      "status": "BYTE_IDENTICAL_INFERENCE_AND_LOCKS",
+      "baseline": "v0.2.3",
+      "current_source": "af4968b7cca397261a98d1b2c5d22cff6e3b1260",
+      "sha256": {
+        "poetry.lock": "5f69f6ec0ae7ca9daa3514d76b70efc1e6891d68ce3c31370b9993a0e3bce22b",
+        "provider.lock.json": "9f516fc3a16fd33e9a03c518ada6ea5a493f8f191011c6f8dd2365079b789f36",
+        "release.json": "f979b5590a85d75741c2382b4be299ab9cdcd6c0cf3c578394b1046fdc8437b7",
+        "prompts/sensor-surface-v1.txt": "6d69e666081fc83e24e192ddf11f1083027075771e8df38d80ae548d23737d84",
+        "prompts/sensor-surface-v2.txt": "7ddc42e7dde5dcdef5ffab9f14fc340b53028fab195b0a50b6c008f401b9cf02",
+        "src/aelev_deep_screening_provider/engine.py": "d66a859964bfc8ebe71d3e99768acf3c33fc5faa1a0d7e40950e608a83a50e75",
+        "src/aelev_deep_screening_provider/app.py": "a2e43473de63bee71081a6f97e4fcb7e4f0c9f66dbc2b02dddeafa42bc65c25a",
+        "src/aelev_deep_screening_provider/contract.py": "dafceb2623b487c0a526fdd1e42d26557e5c41810ca33cffc6c3ec3a20a00b2a",
+        "src/aelev_deep_screening_provider/media.py": "3e8ebb9ed73a3a9974a7a40f8e4339ba79e1d3c3e765e84f32628378d2ac71fa"
+      }
+    },
+    "historical_corpus_replayed_in_this_run": false,
+    "historical_raw_paths_available_in_this_run": false,
+    "scope": "Published historical review is linked, not relabelled as a new full-corpus replay."
+  },
+  "tls": {
+    "anonymous_rejected": true,
+    "same_ca_foreign_peer_rejected": true,
+    "expected_server_uri_checked_before_request": true,
+    "test_pki": true,
+    "permanent_native_identity_admitted": false
+  },
+  "native_security": {
+    "amd64": {
+      "status": "SCOPED_SECURITY_PASS",
+      "raw_severity_counts": {
+        "CRITICAL": 1,
+        "HIGH": 35,
+        "LOW": 88,
+        "MEDIUM": 106,
+        "UNKNOWN": 4
+      },
+      "unresolved_high_critical_package_findings": 0
+    },
+    "arm64": {
+      "status": "SCOPED_SECURITY_PASS",
+      "raw_severity_counts": {
+        "CRITICAL": 1,
+        "HIGH": 35,
+        "LOW": 88,
+        "MEDIUM": 106,
+        "UNKNOWN": 4
+      },
+      "unresolved_high_critical_package_findings": 0
+    }
+  },
+  "supply_chain": {
+    "status": "SUPPLY_CHAIN_PASS",
+    "image": "ghcr.io/sapogov1978/aelev-deep-screening-provider@sha256:f9f732515f66855d4b3744b682276e1d99ff3f2f9fa1d327e0353109a22ab213",
+    "source": "af4968b7cca397261a98d1b2c5d22cff6e3b1260",
+    "signature_identity": "https://github.com/sapogov1978/AELEV-deep-screening-provider/.github/workflows/release.yml@refs/tags/v0.2.4",
+    "platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "engine_image_id": "sha256:f9f732515f66855d4b3744b682276e1d99ff3f2f9fa1d327e0353109a22ab213",
+    "native_architecture": "linux/arm64",
+    "source_audit_run": 43427920485,
+    "release_run": 43428412404,
+    "per_platform_attestation_links_verified": true,
+    "per_platform_exact_vcs_source_verified": true,
+    "per_platform_spdx_inventory_verified": true
+  },
+  "native_tests": {
+    "source": {
+      "service": "deep",
+      "target": "test",
+      "image_id": "sha256:8995c4f160274ad591d8aa597eb1681d4957ac2f53534261dac9f2c888172015",
+      "returncode": 0,
+      "summary": [
+        "74 passed, 2 skipped in 3.38s"
+      ],
+      "inference_requested": false,
+      "log": "/Users/ksap/.local/share/aelev/evidence/provider-trust-rotation-20261113/deep-native-test-tests.log"
+    },
+    "image_health_and_empty_mount": {
+      "service": "deep",
+      "target": "runtime",
+      "image_id": "sha256:1ff22af5c003ba4a3ad37d911001d0b7ef3cc82948d6d132dbcd3e68604001c3",
+      "returncode": 0,
+      "summary": [
+        "2 passed in 34.75s"
+      ],
+      "inference_requested": false,
+      "log": "/Users/ksap/.local/share/aelev/evidence/provider-trust-rotation-20261113/deep-native-runtime-tests.log"
+    }
+  },
+  "cleanup_preserved": true,
+  "working_runtime_switched": false,
+  "queue_resume_issued": false,
+  "owner_current_policy_e2e": false,
+  "physical_multihost_proven": false,
+  "evidence_sha256": {
+    "real-material-live.json": "753a60c6b961d6463bb69601a73fbc49062e1784b5599da9f5e3d52624163e20",
+    "live-provider.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "owner-evidence-verification.json": "c8a987718c9e2b5e95a6be980bfce383d45e33977794360014316245acf3cc8a",
+    "signature.json": "06dd3ed12cd363971a998225f79572b4b67c266626c34579681b1300e49f71cc",
+    "manifest.json": "f9f732515f66855d4b3744b682276e1d99ff3f2f9fa1d327e0353109a22ab213",
+    "provenance.json": "d6fc8cb89d608938aa79bb3439565f7d04d95c806d260b8f5397c65ef70eef97",
+    "sbom.json": "3440db97652c48e967ac3857fd95bac5a20312f20cab0a421c51a0f1cd219988",
+    "supply-chain-verification.json": "7790a8dcadb733b2afa42dac33df12578f2b59df8f8700a8ad5649082f6a6143",
+    "security-amd64.json": "def12dc56bd8f65cf07de970557dea9dc99ae1a9d5969fe2d0190a269b19e0da",
+    "security-arm64.json": "416d16a0474f071a0e9aac40a6d50fe9db5bb232c6b29caef7fcd1ef148cd7a9",
+    "vulnerabilities-amd64.json": "8566d31465e436dc62bfdb086dc7f73bfa5cb28ed0a7120dd9e094a56f41bccd",
+    "vulnerabilities-arm64.json": "b43b4c30841f9630252e5c624ef6685df3c5264d8b850b9893cd03e54dececd2",
+    "inference-baseline.json": "e14274544bf5a8e22e2ca04c00587f0dc6ce6d2a649ce7eb684972cb4a8aa657"
+  },
+  "raw_evidence_path": "/Users/ksap/.local/share/aelev/evidence/provider-trust-rotation-20261113/deep-release/real-material-live.json",
+  "remaining_gates": [
+    "PERMANENT_NATIVE_IDENTITIES_AND_EGRESS",
+    "FUNCTIONAL_OWNER_ADMISSION_AND_CURRENT_SCOPE",
+    "PHYSICAL_MULTIHOST",
+    "PLATFORM_END_TO_END",
+    "DEPLOYMENT_SITE_ADMISSION"
+  ],
+  "instruction_digest": "sha256:e9a44c04721b1f328146ea920ddc30f291303bcb61faf65584f66db95fe1305c",
+  "owner_evidence_verification": {
+    "status": "OWNER_EVIDENCE_VERIFIER_PASS",
+    "candidates": 1,
+    "access_points": 7,
+    "instruction_digest": "sha256:e9a44c04721b1f328146ea920ddc30f291303bcb61faf65584f66db95fe1305c",
+    "unknown_scope_length": 725,
+    "unobserved_destinations_claimed_inspected": false
+  },
+  "known_output_limitations": [
+    "Existing 160-character candidate description may end with a partial clause; evidence and scope are separately verified."
+  ],
+  "material_evidence_sha256": "6bcc7498f024d2a70ec3c258e3b5c36d910d3ec38f94c8714595bbe9a792b25e"
+}

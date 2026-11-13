@@ -6,10 +6,10 @@ material over mutually authenticated HTTPS and calls the OpenAI Responses API.
 Model ID, prompt and credential remain provider-owned and never cross the
 opaque port.
 
-Candidate 0.2.4 closes existing-session admission after CA/SVID replacement
-under [ADR-0002](docs/adr/0002-session-trust-lifecycle.md). A real TLS regression
-reproduced the prior failure. New signed-image and owner admission require
-separate evidence; earlier release receipts remain historical.
+Release [v0.2.4](docs/audit/provider-release-v0.2.4-20261113.md) closes
+existing-session admission after CA/SVID replacement under ADR-0002. Signatures,
+both native security profiles and one selected actual real-material replay are
+verified. Permanent identities, owner/current-scope and physical E2E remain open.
 
 Release [v0.2.3](docs/audit/provider-release-v0.2.3-20261111.md) adds exact client SPIFFE authorization and renewable TLS
 generations under [ADR-0001](docs/adr/0001-tls-identity-lifecycle.md). Local

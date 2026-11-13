@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Verified signed v0.2.4: exact tag identity, per-platform SLSA/SPDX, both
+  native security profiles and one actual real-material mTLS request. Recorded
+  source/output hashes, unchanged inference baseline, unavailable historical
+  raw paths, limited replay scope and open owner/identity/physical gates.
+
 - Candidate 0.2.4 binds every HTTP dispatch to the actual current handshake
   context. Replacing CA/SVID blocks old keep-alive sessions before inference,
   with fresh connections accepted without a listener restart. Regression tests
